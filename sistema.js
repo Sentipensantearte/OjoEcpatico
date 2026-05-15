@@ -1,13 +1,9 @@
 // ====================================
-// PALABRAS
+// ELEMENTOS
 // ====================================
 
 const palabras =
   document.querySelectorAll(".palabra");
-
-// ====================================
-// MODAL
-// ====================================
 
 const modal =
   document.getElementById("modal");
@@ -16,36 +12,98 @@ const cerrarModal =
   document.getElementById("cerrar-modal");
 
 // ====================================
-// CENTRO
+// VARIABLES GLOBALES
 // ====================================
 
-const centroX =
-  window.innerWidth / 2;
+let anchoPantalla;
+let altoPantalla;
 
-const centroY =
-  window.innerHeight / 2;
+let centroX;
+let centroY;
 
-// ====================================
-// RADIOS
-// ====================================
-
-const radioX =
-  window.innerWidth * 0.28;
-
-const radioY =
-  window.innerHeight * 0.20;
-
-// ====================================
-// ROTACION
-// ====================================
+let radioX;
+let radioY;
 
 let rotacion = 0;
 
-// velocidad normal
-let velocidad = 0.1;
+let velocidad = 0.08;
 
 // ====================================
-// ANIMACION
+// FUNCION RESPONSIVE
+// ====================================
+
+function recalcularSistema() {
+
+  // tamaño pantalla
+
+  anchoPantalla =
+    window.innerWidth;
+
+  altoPantalla =
+    window.innerHeight;
+
+  // centro
+
+  centroX =
+    anchoPantalla / 2;
+
+  centroY =
+    altoPantalla / 2;
+
+  // usamos el lado mas chico
+  // para mantener proporciones
+
+  const ladoMenor =
+    Math.min(
+      anchoPantalla,
+      altoPantalla
+    );
+
+  // ==================================
+  // TAMAÑO ORBITA
+  // ==================================
+
+  radioX =
+    ladoMenor * 0.38;
+
+  radioY =
+    ladoMenor * 0.20;
+
+  // ==================================
+  // RESPONSIVE TEXTO
+  // ==================================
+
+  palabras.forEach((palabra) => {
+
+    // tamaño base responsive
+
+    let tamañoFuente =
+      ladoMenor * 0.022;
+
+    // limites
+
+    tamañoFuente =
+      Math.max(12, tamañoFuente);
+
+    tamañoFuente =
+      Math.min(22, tamañoFuente);
+
+    palabra.style.fontSize =
+      tamañoFuente + "px";
+  });
+}
+
+// ejecutamos una vez
+recalcularSistema();
+
+// recalculamos al cambiar tamaño
+window.addEventListener(
+  "resize",
+  recalcularSistema
+);
+
+// ====================================
+// ANIMACION ORBITAL
 // ====================================
 
 function animar() {
@@ -65,7 +123,9 @@ function animar() {
       (anguloBase + rotacion)
       * Math.PI / 180;
 
-    // posicion
+    // ==================================
+    // POSICION
+    // ==================================
 
     const x =
       centroX +
@@ -81,15 +141,32 @@ function animar() {
     palabra.style.top =
       y + "px";
 
-    // profundidad
+    // ==================================
+    // PROFUNDIDAD
+    // ==================================
 
     const profundidad =
       (Math.sin(angulo) + 1) / 2;
 
-    palabra.style.opacity =
-      0.3 + profundidad * 0.7;
+    // escala
 
+    const escala =
+      0.7 + profundidad * 0.5;
+
+    // opacidad
+
+    palabra.style.opacity =
+      0.25 + profundidad * 0.75;
+
+    // transform
+
+    palabra.style.transform =
+      "translate(-50%, -50%) scale(" +
+      escala +
+      ")";
   });
+
+  // rotacion global
 
   rotacion += velocidad;
 
@@ -105,13 +182,18 @@ animar();
 
 palabras.forEach((palabra) => {
 
-  // hover
+  // ==================================
+  // HOVER
+  // ==================================
 
   palabra.addEventListener(
     "mouseenter",
     () => {
 
       velocidad = 0.01;
+
+      palabra.style.textShadow =
+        "0 0 12px rgba(255,255,255,0.9)";
     }
   );
 
@@ -119,11 +201,16 @@ palabras.forEach((palabra) => {
     "mouseleave",
     () => {
 
-      velocidad = 0.1;
+      velocidad = 0.08;
+
+      palabra.style.textShadow =
+        "none";
     }
   );
 
-  // click
+  // ==================================
+  // CLICK
+  // ==================================
 
   palabra.addEventListener(
     "click",
@@ -148,6 +235,6 @@ cerrarModal.addEventListener(
     modal.style.display =
       "none";
 
-    velocidad = 0.1;
+    velocidad = 0.08;
   }
 );
