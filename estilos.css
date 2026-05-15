@@ -1,0 +1,189 @@
+/* ====================================
+   RESET
+==================================== */
+
+* {
+
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ====================================
+   BODY
+==================================== */
+
+body {
+
+  width: 100vw;
+  height: 100vh;
+
+  overflow: hidden;
+
+  background: #0b0b0b;
+
+  color: white;
+
+  font-family: Arial, sans-serif;
+}
+
+/* ====================================
+   UNIVERSO
+==================================== */
+
+#universo {
+
+  position: relative;
+
+  width: 100vw;
+  height: 100vh;
+}
+
+/* ====================================
+   OJO
+==================================== */
+
+#ojo {
+
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  transform: translate(-50%, -50%);
+
+  font-size: 90px;
+
+  z-index: 20;
+}
+
+/* ====================================
+   ORBITA
+==================================== */
+
+#orbita {
+
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  transform: translate(-50%, -50%);
+
+  width: 70vw;
+  height: 40vw;
+
+  max-width: 900px;
+  max-height: 500px;
+
+  border-radius: 50%;
+
+  border:
+    1px solid rgba(255,255,255,0.1);
+}
+
+/* ====================================
+   PALABRAS
+==================================== */
+
+.palabra {
+
+  position: absolute;
+
+  color: white;
+
+  font-size: 18px;
+
+  letter-spacing: 3px;
+
+  white-space: nowrap;
+
+  transform:
+    translate(-50%, -50%);
+
+  transition:
+    opacity 0.3s,
+    transform 0.3s,
+    text-shadow 0.3s;
+
+  z-index: 50;
+
+  cursor: pointer;
+}
+
+/* ====================================
+   HOVER
+==================================== */
+
+.palabra:hover {
+
+  text-shadow:
+    0 0 10px rgba(255,255,255,0.9);
+
+  transform:
+    translate(-50%, -50%)
+    scale(1.2);
+}
+
+/* ====================================
+   MODAL
+==================================== */
+
+#modal {
+
+  position: fixed;
+
+  inset: 0;
+
+  background:
+    rgba(0,0,0,0.82);
+
+  display: none;
+
+  align-items: center;
+  justify-content: center;
+
+  z-index: 999;
+}
+
+/* ====================================
+   CONTENIDO MODAL
+==================================== */
+
+#contenido-modal {
+
+  width: 70vw;
+
+  max-width: 700px;
+
+  padding: 40px;
+
+  background: #111;
+
+  border:
+    1px solid rgba(255,255,255,0.1);
+
+  position: relative;
+}
+
+/* ====================================
+   BOTON CERRAR
+==================================== */
+
+#cerrar-modal {
+
+  position: absolute;
+
+  right: 15px;
+  top: 15px;
+
+  background: transparent;
+
+  border: none;
+
+  color: white;
+
+  font-size: 24px;
+
+  cursor: pointer;
+}
