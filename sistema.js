@@ -129,7 +129,7 @@ function setEyeImage(key) {
 
 function getEyeKeyFromMouse(event) {
   const dx = event.clientX - centroX;
-  const dy = event.clientY - centroY;
+  const dy = centroY - event.clientY;
   let angle = Math.atan2(dy, dx) * 180 / Math.PI;
   if (angle < 0) angle += 360;
 
