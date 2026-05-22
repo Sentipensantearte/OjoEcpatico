@@ -398,11 +398,56 @@ palabras.forEach((palabra) => {
   palabra.addEventListener(
     "click",
     () => {
+      const title = palabra.dataset.title || "EL OJO OBSERVA";
+      const text = palabra.dataset.text || "Aquí aparecerá la información correspondiente a la opción seleccionada.";
+      const link = palabra.dataset.link;
+      const mobileLink = palabra.dataset.mobileLink;
+      const linkText = palabra.dataset.linkText || "Abrir enlace";
+      const embedEnabled = palabra.dataset.embed !== "false";
+      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+      if (link && isMobile) {
+        const target = mobileLink || link;
+        window.location.href = target;
+        if (mobileLink && link) {
+          setTimeout(() => {
+            window.open(link, "_blank");
+          }, 700);
+        }
+        return;
+      }
+
+      const modalTitle = document.getElementById("modal-title");
+      const modalText = document.getElementById("modal-text");
+      const modalAction = document.getElementById("modal-action");
+
+      modalTitle.textContent = title;
+      modalText.textContent = text;
+      modalAction.innerHTML = "";
+
+      if (link && embedEnabled) {
+        const iframeWrap = document.createElement("div");
+        iframeWrap.className = "modal-iframe-wrap";
+        const iframe = document.createElement("iframe");
+        iframe.src = link;
+        iframe.className = "modal-iframe";
+        iframe.loading = "lazy";
+        iframeWrap.appendChild(iframe);
+        modalAction.appendChild(iframeWrap);
+      }
+
+      if (link) {
+        const button = document.createElement("a");
+        button.href = link;
+        button.target = "_blank";
+        button.rel = "noopener noreferrer";
+        button.className = "modal-link-button";
+        button.textContent = linkText;
+        modalAction.appendChild(button);
+      }
 
       velocidad = 0;
-
-      modal.style.display =
-        "flex";
+      modal.style.display = "flex";
     }
   );
 });

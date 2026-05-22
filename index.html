@@ -31,26 +31,26 @@
 
     <!-- PALABRAS -->
 
-    <div class="palabra" data-angulo="0" data-eye="Derecha">RASTRO</div>
-    <div class="palabra" data-angulo="45" data-eye="DerArriba">PULSO</div>
-    <div class="palabra" data-angulo="90" data-eye="Arriba">ECO</div>
-    <div class="palabra" data-angulo="135" data-eye="IzqArriba">RITMO</div>
-    <div class="palabra" data-angulo="180" data-eye="izquierda">VESTIGIO</div>
-    <div class="palabra" data-angulo="225" data-eye="IzqAbajo">UMBRAL</div>
-    <div class="palabra" data-angulo="270" data-eye="Abajo">CARTOGRAFÍA</div>
-    <div class="palabra" data-angulo="315" data-eye="DerAbajo">DERIVA</div>
+    <div class="palabra" data-angulo="0" data-eye="Derecha" data-title="SOMOS" data-text="Una ventana emergente con información del proyecto a modificar.">SOMOS</div>
+    <div class="palabra" data-angulo="51.4" data-eye="DerArriba" data-link="https://www.facebook.com/profile.php?id=61589682839717" data-mobile-link="fb://profile/61589682839717" data-link-text="Abrir Facebook">PULSO</div>
+    <div class="palabra" data-angulo="102.8" data-eye="Arriba" data-link="https://www.facebook.com/share/g/1JGiWv4uG9/" data-mobile-link="fb://facewebmodal/f?href=https://www.facebook.com/share/g/1JGiWv4uG9/" data-link-text="Abrir grupo de Facebook">ECO</div>
+    <div class="palabra" data-angulo="154.2" data-eye="IzqArriba" data-title="VESTIGIO" data-text="Información en la ventana emergente del Backstage a modificar...">VESTIGIO</div>
+    <div class="palabra" data-angulo="205.7" data-eye="izquierda" data-link="https://www.youtube.com/watch?v=G507822Q1cY" data-mobile-link="vnd.youtube:G507822Q1cY" data-link-text="Ver YouTube">ORIGEN</div>
+    <div class="palabra" data-angulo="257.1" data-eye="IzqAbajo" data-link="https://www.tiktok.com" data-mobile-link="tiktok://" data-link-text="Ver TikTok">DERIVA</div>
+    <div class="palabra" data-angulo="308.5" data-eye="DerAbajo" data-title="BRÚJULA" data-text="Ventana emergente con mapa e información.">BRÚJULA</div>
 
   </main>
 
   <!-- MODAL -->
 
-  <!-- ROTATE SCREEN NOTICE -->
+  <!-- ROTATE SCREEN NOTICE 
   <div id="rotate-screen" aria-hidden="true">
     <div class="rotate-content">
       <div class="rotate-emoji">↻</div>
       <div class="rotate-text">Gira tu dispositivo a horizontal para esta experiencia</div>
     </div>
   </div>
+  -->
 
 
   <div id="modal">
@@ -61,20 +61,15 @@
         ✕
       </button>
 
-      <h2>
+      <h2 id="modal-title">
         EL OJO OBSERVA
       </h2>
 
-      <p>
-        Acá puede abrirse:
+      <p id="modal-text">
+        Selecciona una opción para ver más detalles.
       </p>
 
-      <ul>
-        <li>la app p5.js</li>
-        <li>el mapa</li>
-        <li>la instalación</li>
-        <li>videos</li>
-      </ul>
+      <div id="modal-action"></div>
 
     </div>
 

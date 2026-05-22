@@ -186,6 +186,45 @@ body {
   position: relative;
 }
 
+#modal-action {
+  margin-top: 24px;
+}
+
+.modal-iframe-wrap {
+  width: 100%;
+  min-height: 320px;
+  max-height: 480px;
+  overflow: hidden;
+  border-radius: 18px;
+  margin-bottom: 18px;
+  background: #000;
+}
+
+.modal-iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 320px;
+  border: none;
+}
+
+.modal-link-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 18px;
+  background: rgba(255,255,255,0.08);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.18);
+  text-decoration: none;
+  border-radius: 999px;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.modal-link-button:hover {
+  background: rgba(255,255,255,0.14);
+  transform: translateY(-1px);
+}
+
 /* ====================================
    BOTON CERRAR
 ==================================== */
