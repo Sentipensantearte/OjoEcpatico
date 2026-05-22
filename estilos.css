@@ -76,11 +76,8 @@ body {
 
   transform: translate(-50%, -50%);
 
-  width: 70vw;
-  height: 40vw;
-
-  max-width: 900px;
-  max-height: 500px;
+  width: min(70vmin, 900px);
+  height: min(40vmin, 500px);
 
   border-radius: 50%;
 

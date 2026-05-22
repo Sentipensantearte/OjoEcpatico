@@ -83,11 +83,14 @@ function recalcularSistema() {
   // TAMAÑO ORBITA
   // ==================================
 
-  radioX =
-    ladoMenor * 0.38;
-
-  radioY =
-    ladoMenor * 0.20;
+  const isLandscape = anchoPantalla > altoPantalla;
+  if (isLandscape) {
+    radioX = ladoMenor * 0.34;
+    radioY = ladoMenor * 0.16;
+  } else {
+    radioX = ladoMenor * 0.38;
+    radioY = ladoMenor * 0.20;
+  }
 
   // ==================================
   // RESPONSIVE TEXTO
@@ -200,22 +203,28 @@ let savedVelocidad = velocidad;
 
 function checkOrientationPause() {
   const isPortrait = window.innerHeight > window.innerWidth;
-  // Only show on touch devices or small screens
   const isSmall = window.matchMedia('(max-width: 900px)').matches;
 
-  if (isPortrait && isSmall) {
-    if (rotateScreen) rotateScreen.style.display = 'flex';
-    savedVelocidad = velocidad;
-    velocidad = 0;
-  } else {
-    if (rotateScreen) rotateScreen.style.display = 'none';
-    velocidad = savedVelocidad || 0.08;
+  if (rotateScreen) {
+    if (isPortrait && isSmall) {
+      rotateScreen.style.display = 'flex';
+      savedVelocidad = velocidad;
+      velocidad = 0;
+    } else {
+      rotateScreen.style.display = 'none';
+      velocidad = savedVelocidad || 0.08;
+    }
   }
 }
 
-window.addEventListener('resize', checkOrientationPause);
-window.addEventListener('orientationchange', checkOrientationPause);
-// call once
+window.addEventListener('resize', () => {
+  recalcularSistema();
+  checkOrientationPause();
+});
+window.addEventListener('orientationchange', () => {
+  recalcularSistema();
+  checkOrientationPause();
+});
 checkOrientationPause();
 
 
