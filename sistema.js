@@ -127,9 +127,22 @@ function setEyeImage(key) {
   ojoImg.src = src;
 }
 
-function getEyeKeyFromMouse(event) {
-  const dx = event.clientX - centroX;
-  const dy = centroY - event.clientY;
+function getClientCoordinates(event) {
+  if (event.touches && event.touches.length) {
+    return {
+      clientX: event.touches[0].clientX,
+      clientY: event.touches[0].clientY
+    };
+  }
+  return {
+    clientX: event.clientX,
+    clientY: event.clientY
+  };
+}
+
+function getEyeKeyFromMouse(coords) {
+  const dx = coords.clientX - centroX;
+  const dy = centroY - coords.clientY;
   let angle = Math.atan2(dy, dx) * 180 / Math.PI;
   if (angle < 0) angle += 360;
 
@@ -258,40 +271,87 @@ palabras.forEach((palabra) => {
   // HOVER
   // ==================================
 
+  const startTouchHover = (event) => {
+    hoverCount += 1;
+    stopIdleAnimation();
+    velocidad = 0.01;
+
+    const coords = getClientCoordinates(event);
+    const eyeKey = getEyeKeyFromMouse(coords);
+    setEyeImage(eyeKey);
+
+    palabra.style.textShadow =
+      "0 0 12px rgba(255,255,255,0.9)";
+  };
+
+  const moveTouchHover = (event) => {
+    if (hoverCount === 0) return;
+    const coords = getClientCoordinates(event);
+    const eyeKey = getEyeKeyFromMouse(coords);
+    setEyeImage(eyeKey);
+  };
+
+  const endTouchHover = () => {
+    hoverCount = Math.max(0, hoverCount - 1);
+    velocidad = 0.08;
+
+    palabra.style.textShadow =
+      "none";
+
+    if (hoverCount === 0) {
+      setTimeout(() => {
+        if (hoverCount === 0) {
+          startIdleAnimation();
+        }
+      }, 80);
+    }
+  };
+
   palabra.addEventListener(
     "mouseenter",
-    (event) => {
+    startTouchHover
+  );
 
-      hoverCount += 1;
-      stopIdleAnimation();
-      velocidad = 0.01;
+  palabra.addEventListener(
+    "pointerdown",
+    startTouchHover
+  );
 
-      const eyeKey = getEyeKeyFromMouse(event);
-      setEyeImage(eyeKey);
+  palabra.addEventListener(
+    "touchstart",
+    startTouchHover,
+    { passive: true }
+  );
 
-      palabra.style.textShadow =
-        "0 0 12px rgba(255,255,255,0.9)";
-    }
+  palabra.addEventListener(
+    "mousemove",
+    moveTouchHover
+  );
+
+  palabra.addEventListener(
+    "touchmove",
+    moveTouchHover,
+    { passive: true }
   );
 
   palabra.addEventListener(
     "mouseleave",
-    () => {
+    endTouchHover
+  );
 
-      hoverCount = Math.max(0, hoverCount - 1);
-      velocidad = 0.08;
+  palabra.addEventListener(
+    "pointerup",
+    endTouchHover
+  );
 
-      palabra.style.textShadow =
-        "none";
+  palabra.addEventListener(
+    "touchend",
+    endTouchHover
+  );
 
-      if (hoverCount === 0) {
-        setTimeout(() => {
-          if (hoverCount === 0) {
-            startIdleAnimation();
-          }
-        }, 80);
-      }
-    }
+  palabra.addEventListener(
+    "touchcancel",
+    endTouchHover
   );
 
   // ==================================
