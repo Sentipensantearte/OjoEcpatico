@@ -398,8 +398,8 @@ palabras.forEach((palabra) => {
   palabra.addEventListener(
     "click",
     () => {
-      const title = palabra.dataset.title || "EL OJO OBSERVA";
-      const text = palabra.dataset.text || "Aquí aparecerá la información correspondiente a la opción seleccionada.";
+      const title = palabra.dataset.title || "Lo que no querés ver...";
+      const text = palabra.dataset.text || "No deja de existir.";
       const link = palabra.dataset.link;
       const mobileLink = palabra.dataset.mobileLink;
       const linkText = palabra.dataset.linkText || "Abrir enlace";
