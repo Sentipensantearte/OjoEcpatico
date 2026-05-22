@@ -210,3 +210,41 @@ body {
 
   cursor: pointer;
 }
+
+/* ====================================
+   ROTATE SCREEN
+==================================== */
+
+#rotate-screen {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.95);
+  z-index: 2000;
+  text-align: center;
+  color: white;
+  padding: 20px;
+}
+
+.rotate-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.rotate-emoji {
+  font-size: 48px;
+}
+
+.rotate-text {
+  font-size: 18px;
+  max-width: 320px;
+  line-height: 1.2;
+}
+
+@media (min-width: 700px) {
+  #rotate-screen { display: none; }
+}

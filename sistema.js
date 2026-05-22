@@ -191,6 +191,34 @@ startIdleAnimation();
 // ANIMACION ORBITAL
 // ====================================
 
+// ====================================
+// ORIENTATION / ROTATE PROMPT
+// ====================================
+
+const rotateScreen = document.getElementById('rotate-screen');
+let savedVelocidad = velocidad;
+
+function checkOrientationPause() {
+  const isPortrait = window.innerHeight > window.innerWidth;
+  // Only show on touch devices or small screens
+  const isSmall = window.matchMedia('(max-width: 900px)').matches;
+
+  if (isPortrait && isSmall) {
+    if (rotateScreen) rotateScreen.style.display = 'flex';
+    savedVelocidad = velocidad;
+    velocidad = 0;
+  } else {
+    if (rotateScreen) rotateScreen.style.display = 'none';
+    velocidad = savedVelocidad || 0.08;
+  }
+}
+
+window.addEventListener('resize', checkOrientationPause);
+window.addEventListener('orientationchange', checkOrientationPause);
+// call once
+checkOrientationPause();
+
+
 function animar() {
 
   palabras.forEach((palabra) => {
