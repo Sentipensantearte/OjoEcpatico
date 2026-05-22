@@ -52,9 +52,13 @@ body {
 
   transform: translate(-50%, -50%);
 
-  font-size: 90px;
-
   z-index: 20;
+}
+
+#ojo img {
+  display: block;
+  width: min(180px, 22vw);
+  height: auto;
 }
 
 /* ====================================
