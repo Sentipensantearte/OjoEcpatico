@@ -398,12 +398,13 @@ palabras.forEach((palabra) => {
   palabra.addEventListener(
     "click",
     () => {
+      
       const title = palabra.dataset.title || "Lo que no querés ver...";
       const text = palabra.dataset.text || "No deja de existir.";
       const link = palabra.dataset.link;
       const mobileLink = palabra.dataset.mobileLink;
       const linkText = palabra.dataset.linkText || "Abrir enlace";
-      const embedEnabled = palabra.dataset.embed !== "false";
+      let embedEnabled = palabra.dataset.embed !== "false";
       const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
       if (link && isMobile) {
@@ -417,6 +418,21 @@ palabras.forEach((palabra) => {
         return;
       }
 
+      // Desactivar embed para dominios que bloquean iframes (Facebook, TikTok, Instagram)
+      if (link) {
+        try {
+          const parsed = new URL(link, window.location.href);
+          const host = parsed.hostname.replace(/^www\./, "");
+          const blocked = ["facebook.com", "tiktok.com", "instagram.com"];
+          if (blocked.some(d => host.includes(d))) {
+            embedEnabled = false;
+          }
+        } catch (e) {
+          // si la URL no es válida, no cambiamos embedEnabled
+        }
+      }
+
+      
       const modalTitle = document.getElementById("modal-title");
       const modalText = document.getElementById("modal-text");
       const modalAction = document.getElementById("modal-action");
