@@ -438,7 +438,12 @@ palabras.forEach((palabra) => {
       const modalAction = document.getElementById("modal-action");
 
       modalTitle.textContent = title;
-      modalText.textContent = text;
+      const formattedText = text
+        .replace(/\r\n/g, "\n")
+        .replace(/\r/g, "\n")
+        .replace(/\n/g, "<br>")
+        .replace(/<br\s*\/?>/gi, "<br>");
+      modalText.innerHTML = formattedText;
       modalAction.innerHTML = "";
 
       if (link && embedEnabled) {
@@ -472,13 +477,19 @@ palabras.forEach((palabra) => {
 // CERRAR MODAL
 // ====================================
 
+function closeModal() {
+  if (modal.style.display !== "flex") return;
+  modal.style.display = "none";
+  velocidad = 0.08;
+}
+
 cerrarModal.addEventListener(
   "click",
-  () => {
-
-    modal.style.display =
-      "none";
-
-    velocidad = 0.08;
-  }
+  closeModal
 );
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    closeModal();
+  }
+});

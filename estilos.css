@@ -46,6 +46,11 @@ body {
   font-family: 'Comfortaa', 'Josefin Sans', sans-serif;
 }
 
+#modal-text {
+  white-space: pre-line;
+  line-height: 1.6;
+}
+
 #page-title {
 
   position: absolute;
@@ -214,6 +219,8 @@ body {
 
   max-width: 700px;
 
+  max-height: calc(100vh - 60px);
+
   padding: 40px;
 
   background: #111;
@@ -222,6 +229,45 @@ body {
     1px solid rgba(255,255,255,0.1);
 
   position: relative;
+
+  overflow: auto;
+}
+
+#cerrar-modal {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 38px;
+  height: 38px;
+  border: none;
+  background: transparent;
+  color: white;
+  font-size: 1.3rem;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+
+#contenido-modal::-webkit-scrollbar {
+  width: 10px;
+}
+
+#contenido-modal::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+#contenido-modal::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+}
+
+#contenido-modal::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+#contenido-modal {
+  scrollbar-color: rgba(255, 255, 255, 0.12) rgba(255, 255, 255, 0.05);
+  scrollbar-width: thin;
 }
 
 #modal-action {
