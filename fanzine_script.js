@@ -1,10 +1,6 @@
-/* =========================================================
-   JAVASCRIPT DEL FANZINE
-   Este archivo solo maneja interactividad.
-   La idea es que sea facil de leer y modificar.
-   ========================================================= */
+// Manejo del fanzine.
 
-/* Guardamos todas las paginas en un array para poder navegar. */
+// Guardamos todas las paginas en un array para poder navegar.
 const pages = Array.from(document.querySelectorAll(".page"));
 
 /* Envoltorio interno para cada page-paper: permite escalar contenido sin scroll. */
@@ -91,7 +87,7 @@ window.addEventListener('resize', () => {
   resizeTimer = setTimeout(fitAllPages, 120);
 });
 
-/* Guardamos botones y lugares importantes de la interfaz. */
+// Guardamos botones y lugares importantes de la interfaz.
 const prevPageButton = document.querySelector("#prevPage");
 const nextPageButton = document.querySelector("#nextPage");
 const pageCounter = document.querySelector("#pageCounter");
@@ -100,15 +96,15 @@ const closeIndexButton = document.querySelector("#closeIndex");
 const indexPanel = document.querySelector("#indexPanel");
 const indexList = document.querySelector("#indexList");
 
-/* Esta variable dice que pagina se esta viendo ahora. */
+// Esta variable dice que pagina se esta viendo ahora.
 let currentPage = 0;
 
-/* Funcion chica para escribir numeros con dos digitos: 1 pasa a 01. */
+// Funcion chica para escribir numeros con dos digitos: 1 pasa a 01.
 function twoDigits(number) {
   return String(number).padStart(2, "0");
 }
 
-/* Muestra una pagina y oculta todas las demas. */
+// Muestra una pagina y oculta todas las demas.
 function showPage(pageNumber) {
   /* Evita que el numero se vaya antes de la primera o despues de la ultima pagina. */
   currentPage = Math.max(0, Math.min(pageNumber, pages.length - 1));
@@ -130,7 +126,7 @@ function showPage(pageNumber) {
   requestAnimationFrame(fitAllPages);
 }
 
-/* Construye el indice leyendo el atributo data-title de cada pagina. */
+// Construye el indice leyendo el atributo data-title de cada pagina.
 function buildIndex() {
   pages.forEach((page, index) => {
     const button = document.createElement("button");
@@ -148,45 +144,43 @@ function buildIndex() {
   });
 }
 
-/* Abre el indice lateral. */
+// Abre el indice lateral.
 function openIndex() {
   indexPanel.classList.add("open");
   indexPanel.setAttribute("aria-hidden", "false");
 }
 
-/* Cierra el indice lateral. */
+// Cierra el indice lateral.
 function closeIndex() {
   indexPanel.classList.remove("open");
   indexPanel.setAttribute("aria-hidden", "true");
 }
 
-/* Botones de navegacion inferior. */
+// Botones de navegacion inferior.
 prevPageButton.addEventListener("click", () => showPage(currentPage - 1));
 nextPageButton.addEventListener("click", () => showPage(currentPage + 1));
 
-/* Botones de indice. */
+// Botones de indice.
 menuButton.addEventListener("click", openIndex);
 closeIndexButton.addEventListener("click", closeIndex);
 
-/* Botones que tienen data-go-to, por ejemplo la portada. */
+// Botones que tienen data-go-to, por ejemplo la portada.
 document.querySelectorAll("[data-go-to]").forEach((button) => {
   button.addEventListener("click", () => {
     showPage(Number(button.dataset.goTo));
   });
 });
 
-/* Flechas del teclado para navegar. Escape cierra el indice. */
+// Flechas del teclado para navegar. Escape cierra el indice.
 document.addEventListener("keydown", (event) => {
   if (event.key === "ArrowRight") showPage(currentPage + 1);
   if (event.key === "ArrowLeft") showPage(currentPage - 1);
   if (event.key === "Escape") closeIndex();
 });
 
-/* =========================================================
-   INTERACCIONES POR PAGINA
-   ========================================================= */
+// Interacciones por pagina.
 
-/* Interaccion generica: muestra u oculta una nota escondida. Recalcula escala. */
+// Interaccion generica: muestra u oculta una nota escondida. Recalcula escala.
 document.querySelectorAll("[data-toggle-target]").forEach((button) => {
   button.addEventListener("click", () => {
     const note = document.querySelector(`#${button.dataset.toggleTarget}`);
@@ -196,7 +190,7 @@ document.querySelectorAll("[data-toggle-target]").forEach((button) => {
   });
 });
 
-/* Pagina 2: cerrar y abrir el ojo. */
+// Pagina 2: cerrar y abrir el ojo.
 const blinkEyeButton = document.querySelector("#blinkEye");
 if (blinkEyeButton) {
   blinkEyeButton.addEventListener("click", () => {
@@ -204,7 +198,7 @@ if (blinkEyeButton) {
   });
 }
 
-/* Pagina 4: textos de autores en lenguaje fanzine. */
+// Pagina 4: textos de autores en lenguaje fanzine.
 const authorTexts = {
   franco: "Franco avisa: las redes fueron nuestras antes de que las capturaran. El proyecto intenta abrir un hueco comun dentro de esa captura.",
   casacuberta: "Casacuberta sirve para romper el pedestal: crear tambien es armar herramientas para que otres completen la obra.",
@@ -220,7 +214,7 @@ document.querySelectorAll("[data-author]").forEach((button) => {
 });
 
 
-/* Pagina 9: piezas de redes. */
+// Pagina 9: piezas de redes.
 const postTexts = {
   pulso: "PULSO: pagina publica, senial hacia afuera, ritmo de difusion.",
   eco: "ECO: grupo participativo, foro, archivo vivo de aportes.",
@@ -246,7 +240,7 @@ document.querySelectorAll("[data-post]").forEach((button) => {
   });
 });
 
-/* Pagina 10: duplicar sticker con imagen en lugar de texto. */
+// Pagina 10: duplicar sticker con imagen en lugar de texto.
 const duplicateStickerButton = document.querySelector("#duplicateSticker");
 const stickerWall = document.querySelector("#stickerWall");
 
@@ -260,7 +254,7 @@ if (duplicateStickerButton && stickerWall) {
   });
 }
 
-/* Movilidad de stickers en paginas seleccionadas. */
+// Movilidad de stickers en paginas seleccionadas.
 let activeSticker = null;
 let offsetX = 0;
 let offsetY = 0;
@@ -347,7 +341,7 @@ document.addEventListener("pointercancel", () => {
 
 initStickerInteraction();
 
-/* Pagina 13: formulario final. Guarda notas solo en esta computadora/navegador. */
+// Pagina 13: formulario final. Guarda notas solo en esta computadora/navegador.
 const finalForm = document.querySelector("#finalForm");
 const finalNote = document.querySelector("#finalNote");
 const notesWall = document.querySelector("#notesWall");
@@ -370,7 +364,7 @@ if (finalForm && finalNote && notesWall) {
   });
 }
 
-/* Inicializacion: armamos indice y mostramos la portada. */
+// Inicializacion: armamos indice y mostramos la portada.
 // Recompute scaling when images inside pages finish loading
 function attachImageLoadHandlers() {
   pages.forEach((page) => {

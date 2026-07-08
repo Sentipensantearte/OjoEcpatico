@@ -1,8 +1,4 @@
-/* =========================================================
-   ESTILOS GENERALES
-   Este archivo solo define como se ve el fanzine.
-   El texto y las imagenes estan en index.html.
-   ========================================================= */
+/* Estilos generales del fanzine. */
 
 /* Variables de color para cambiar la paleta desde un solo lugar. */
 :root {
@@ -16,12 +12,10 @@
   --page-design-width: 520px;
 }
 
-/* Caja universal: ayuda a que anchos y altos sean predecibles. */
 * {
   box-sizing: border-box;
 }
 
-/* Fondo general de la pantalla: mesa oscura con ruido simple. */
 body {
   min-height: 100vh;
   margin: 0;
@@ -32,13 +26,6 @@ body {
     linear-gradient(135deg, #090909, #171717);
 }
 
-/* Ajusta la altura y márgenes para evitar scroll dentro del fanzine. */
-.book {
-  min-height: 100vh;
-  display: grid;
-  place-items: center;
-  padding: 10px 10px 66px;
-}
 
 .page {
   display: none;
@@ -56,7 +43,6 @@ input {
   font: inherit;
 }
 
-/* Los botones son intencionalmente crudos, como recortes pegados. */
 button {
   cursor: pointer;
 }
@@ -81,21 +67,8 @@ button {
   background: rgba(185, 37, 34, 0.95);
 }
 
-/* Oculta el SVG de simbolos reutilizables. */
-.svg-defs {
-  position: absolute;
-  width: 0;
-  height: 0;
-  overflow: hidden;
-}
+/* Estructura del librito. */
 
-/* =========================================================
-   ESTRUCTURA DEL LIBRITO
-   Todas las paginas tienen el mismo formato A5 vertical.
-   A5 es la mitad de una hoja A4 doblada.
-   ========================================================= */
-
-/* El contenedor centra la hoja en pantalla. */
 .book {
   min-height: 100vh;
   display: grid;
@@ -142,7 +115,6 @@ button {
   background-size: cover;
 }
 
-/* Solo la pagina activa se ve. JavaScript cambia esta clase. */
 .page.active {
   display: block;
 }
@@ -188,11 +160,6 @@ button {
   transform-origin: top center;
 }
 
-/* Aplicar padding usando la variable definida en .page-paper */
-.page-inner {
-  padding: var(--page-padding);
-}
-
 /* Pliegue/sombra para recordar el objeto impreso. */
 .page-paper::before {
   content: "";
@@ -218,7 +185,6 @@ button {
   mix-blend-mode: multiply;
 }
 
-/* Numero de pagina en una etiqueta roja. */
 .page-num {
   position: absolute;
   top: 12px;
@@ -340,16 +306,6 @@ figcaption {
   transform: rotate(-2deg);
 }
 
-/* Lista con marcas tipo manifiesto. */
-.zine-list {
-  margin: 10px 0 16px;
-  padding-left: 18px;
-}
-
-.zine-list li {
-  margin: 7px 0;
-}
-
 /* Dos columnas cuando una hoja necesita texto + imagen. */
 .two-columns {
   display: grid;
@@ -410,9 +366,7 @@ figcaption {
   padding: 7px 10px;
 }
 
-/* =========================================================
-   IMAGENES
-   ========================================================= */
+/* Imagenes. */
 
 .image-cutout {
   margin: 0;
@@ -533,9 +487,7 @@ iframe {
   margin-bottom: 8px;
 }
 
-/* =========================================================
-   PORTADA
-   ========================================================= */
+/* Portada. */
 
 .cover .page-paper {
   color: var(--white);
@@ -556,16 +508,6 @@ iframe {
 .cover h1 span {
   color: var(--white);
   background: var(--ink);
-}
-
-.cover-line {
-  width: max-content;
-  max-width: 100%;
-  padding: 8px 10px;
-  color: var(--white);
-  background: rgba(0,0,0,0.85);
-  border-left: 7px solid var(--red);
-  text-transform: uppercase;
 }
 
 .cover-eye {

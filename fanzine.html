@@ -1,7 +1,6 @@
  <!doctype html>
 <html lang="es">
   <head>
-    <!-- Configuracion basica del documento. -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>El Ojo Ecpatico - Fanzine</title>
@@ -12,12 +11,10 @@
   <body>
     <a class="home-button" href="index.html" aria-label="Volver al inicio">← Home</a>
 
-    <!-- Boton fijo para abrir/cerrar el indice del fanzine. -->
     <button class="menu-button" id="menuButton" type="button">
     <span class="menu-lines" aria-hidden="true"></span>
     </button>
 
-    <!-- Indice lateral. JavaScript completa los botones usando los titulos de cada pagina. -->
     <aside class="index-panel" id="indexPanel" aria-hidden="true">
       <div class="index-header">
         <strong>Indice</strong>
@@ -27,9 +24,7 @@
     </aside>
 
 
-    <!-- Contenedor principal. Cada article.page es una hoja igual, como un librito A5. -->
     <main class="book" id="book">
-      <!-- PAGINA 0: PORTADA -->
       <article class="page cover active" data-title="Portada">
         <div class="page-paper">
           <p class="zine-kicker">bitacora del proyecto transmedia</p>
@@ -42,12 +37,9 @@
           <img class="cover-eye eye-img" src="assets/neutro.png" alt="Ojo neutro">
 
           <p class="cover-line">Lo que no querés ver...<br>No deja de existir.</p>
-           <!--<button class="big-paper-button" type="button" data-go-to="1">entrar al librito</button>
-          <p class="page-tag">fanzine digital interactivo </p>-->
         </div>
       </article>
 
-      <!-- PAGINA 1: INTRO -->
       <article class="page" data-title="Introducción">
         <div class="page-paper">
           <span class="page-num">01</span>
@@ -81,7 +73,6 @@
         </div>
       </article>
 
-      <!-- PAGINA 2: Objetivos-->
       <article class="page" data-title="¿Para qué?">
         <div class="page-paper">
           <span class="page-num">02</span>
@@ -108,7 +99,6 @@
         </div>
       </article>
 
-      <!-- PAGINA 3: Transmedia -->
       <article class="page" data-title="Transmedia">
         <div class="page-paper">
           <span class="page-num">03</span>
@@ -128,7 +118,6 @@
         </div>
       </article>
 
-      <!-- PAGINA 4:  El origen-->
       <article class="page" data-title="Origen">
         <div class="page-paper">
           <span class="page-num">04</span>
@@ -145,7 +134,6 @@
         </div>
       </article>
 
-      <!-- PAGINA 5: La Web -->
       <article class="page" data-title="Web">
         <div class="page-paper">
           <span class="page-num">05</span>
@@ -173,7 +161,6 @@
         </div>
       </article>
 
-      <!-- PAGINA 6: App p5-->
       <article class="page" data-title="App p5.js">
         <div class="page-paper">
           <span class="page-num">06</span>
@@ -193,7 +180,6 @@
           
       </article>
 
-      <!-- PAGINA 7: Instalación -->
       <article class="page" data-title="Instalación">
         <div class="page-paper">
           <span class="page-num">07</span>
@@ -217,7 +203,6 @@
      
       </article>
 
-      <!-- PAGINA 8: Redes Sociales -->
       <article class="page" data-title="Redes">
         <div class="page-paper">
           <span class="page-num">08</span>
@@ -240,7 +225,6 @@
         </div>
       </article>
 
-      <!-- PAGINA 9: Stickers -->
       <article class="page page-stickers-9" data-title="Stickers">
         <div class="page-paper">
           <span class="page-num">09</span>
@@ -266,7 +250,6 @@
         </div>
       </article>
 
-      <!-- PAGINA 10: Arte participativo -->
       <article class="page page-stickers-10" data-title="Artivismo">
         <div class="page-paper">
           <span class="page-num">10</span>
@@ -304,7 +287,6 @@
         
       </article>
 
-      <!-- PAGINA 11: comunidad -->
       <article class="page" data-title="Comunidad">
         <div class="page-paper">
           <span class="page-num">11</span>
@@ -326,7 +308,6 @@
         </div>
       </article>
 
-      <!-- PAGINA 12: conclusión-->
       <article class="page" data-title="Esto no termina">
         <div class="page-paper">
           <span class="page-num">12</span>
@@ -351,7 +332,6 @@
         </div>
       </article>
 
-      <!-- PAGINA 13: CIERRE -->
       <article class="page" data-title="Dejá tu huella">
         <div class="page-paper">
           <span class="page-num">13</span>
@@ -373,14 +353,12 @@
       </article>
     </main>
 
-    <!-- Navegacion inferior. -->
     <nav class="bottom-nav" aria-label="Navegacion del fanzine">
       <button id="prevPage" type="button">←</button>
       <p id="pageCounter">00 / 13</p>
       <button id="nextPage" type="button">→</button>
     </nav>
 
-    <!-- El JavaScript solo maneja navegacion e interacciones. -->
     <script src="fanzine_script.js"></script>
   </body>
 </html>
