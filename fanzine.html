@@ -1,0 +1,386 @@
+ <!doctype html>
+<html lang="es">
+  <head>
+    <!-- Configuracion basica del documento. -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>El Ojo Ecpatico - Fanzine</title>
+
+    <link rel="stylesheet" href="fanzine_styles.css">
+  </head>
+
+  <body>
+    <a class="home-button" href="index.html" aria-label="Volver al inicio">← Home</a>
+
+    <!-- Boton fijo para abrir/cerrar el indice del fanzine. -->
+    <button class="menu-button" id="menuButton" type="button">
+    <span class="menu-lines" aria-hidden="true"></span>
+    </button>
+
+    <!-- Indice lateral. JavaScript completa los botones usando los titulos de cada pagina. -->
+    <aside class="index-panel" id="indexPanel" aria-hidden="true">
+      <div class="index-header">
+        <strong>Indice</strong>
+        <button id="closeIndex" type="button">X</button>
+      </div>
+      <div class="index-list" id="indexList"></div>
+    </aside>
+
+
+    <!-- Contenedor principal. Cada article.page es una hoja igual, como un librito A5. -->
+    <main class="book" id="book">
+      <!-- PAGINA 0: PORTADA -->
+      <article class="page cover active" data-title="Portada">
+        <div class="page-paper">
+          <p class="zine-kicker">bitacora del proyecto transmedia</p>
+          <h1>
+            <span>El</span>
+            <span>Ojo</span>
+            <span>Ecpatico</span>
+          </h1>
+
+          <img class="cover-eye eye-img" src="assets/neutro.png" alt="Ojo neutro">
+
+          <p class="cover-line">Lo que no querés ver...<br>No deja de existir.</p>
+           <!--<button class="big-paper-button" type="button" data-go-to="1">entrar al librito</button>
+          <p class="page-tag">fanzine digital interactivo </p>-->
+        </div>
+      </article>
+
+      <!-- PAGINA 1: INTRO -->
+      <article class="page" data-title="Introducción">
+        <div class="page-paper">
+          <span class="page-num">01</span>
+          <h2><span>EL MUNDO ARDE Y VOS SCROLLEÁS</span></h2>
+
+          <div class="two-columns">
+            <section>
+              <p>
+                 Nos están entrenando para que nada nos importe. Vemos genocidios, pobreza y crueldad extrema en la pantalla, y nuestro único reflejo es deslizar el dedo hacia arriba.
+                </p>
+              <p>
+                Ahí entra la "ecpatía": un mecanismo de defensa mental para anestesiarnos frente al dolor ajeno y seguir produciendo sin que se nos rompa la cabeza.
+              </p>
+               <figure class="image-cutout tilted-left">
+              <img src="assets/ojolog.png" alt="Megáfono" />
+              <figcaption>¿No te hace ruido cuando no mirás?</figcaption>
+            </figure>
+              <p>Pero la anestesia nos está deshumanizando. Y nos propusimos hacer algo:<strong>El Ojo Ecpático</strong>  Es una forma de parar el scroll y pensar nuestra mirada hacia el mundo, un proyecto transmedia que intenta interrumpir tu parálisis, sacarte de la inercia y obligarte a mirar lo que habitualmente elegís ignorar.</p>
+            </section>
+
+           
+          </div>
+
+          <div class="interaction-box">
+            <p>A ver si entendí🤔.</p>
+            <button type="button" data-toggle-target="introNote">¿Qué es la ecpatía?</button>
+            <p class="hidden-note" id="introNote">
+              La Ecpatía es un concepto nuevo, un estado entre la Empatía y la Apatía. Un mecanismo que hace que podamos ver el dolor ajeno sin afectarnos por ello, y así, seguir en el engranaje productivo (casi como un robot🤔).
+            </p>
+          </div>
+        </div>
+      </article>
+
+      <!-- PAGINA 2: Objetivos-->
+      <article class="page" data-title="¿Para qué?">
+        <div class="page-paper">
+          <span class="page-num">02</span>
+          <h2><span>El sistema te quiere zombie</span></h2>
+
+          <p>
+            Como diría Marta Franco:  Internet nos fue robada por corporaciones tecnológicas que nos explotan 24/7 para extraer la materia prima más valiosa: nuestros datos. Las plataformas fueron diseñadas como entornos tóxicos y adictivos que nos bombardean con un ruido constante. Es agotador. 
+          </p>
+          <p>
+            Acá venimos a hackear el algoritmo de la indiferencia.No nos puede dar igual la crueldad creciente, no podemos mirar de la misma manera un genocidio que un video de gatitos. Queremos seguir siendo humanes, queremos pensar el mundo y queremos hacerlo mejor.
+          </p>
+          <p>Sólo necesitamos que te permitas algo que antes era automático: Mirar, pensar, sentir, actuar. </p>
+
+          <figure class="eye-lab">
+            <button class="eye-button" id="blinkEye" type="button" data-toggle-target="ecpatiaNote">
+              <img class="eye-img" src="assets/neutro.png" alt="Ojo neutro">
+            </button>
+            <figcaption>¿Sabés que es lo mejor? (preguntale al ojo)</figcaption>
+          </figure>
+          <p class="hidden-note" id="ecpatiaNote">
+          ¡Formar comunidad con gente esté en la misma!
+          </p>
+
+        </div>
+      </article>
+
+      <!-- PAGINA 3: Transmedia -->
+      <article class="page" data-title="Transmedia">
+        <div class="page-paper">
+          <span class="page-num">03</span>
+          <h2><span>GUERRILLA MULTIPLATAFORMA</span></h2>
+
+          <p>
+           Vivimos en un mundo multiplataforma, bombardeados por miles de estímulos que hacen que cualquier cosa se pierda en el mar de sobreinformación. ¿Pero que pasa cuando usamos todos esos medios para una misma cosa?
+          </p>
+          <p>
+            Como diría Scolari, en una red transmedia cada plataforma hace "lo que mejor sabe hacer"para construir sentido global. Nosotres te rodeamos desde todos lados con nuestra obra, para obligarte a parar el scroll y quedarte un poco más con nosotres. Para darte el tiempo que realmente necesitas para ver.
+          </p>
+          <img src="assets/p5.png" style="max-width: 80%;" alt="Mirar por todos los medios"/> 
+
+          <div class="interaction-box">
+            <p>Contra los gigantes tecnocrátas sólo podemos ganar con la guerrilla del arte.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- PAGINA 4:  El origen-->
+      <article class="page" data-title="Origen">
+        <div class="page-paper">
+          <span class="page-num">04</span>
+          <h2><span>El origen: el concepto que pedía más.</span></h2>
+
+          <p>
+           El Ojo Ecpático nació como un videominuto circular. La idea era problematizar la mirada desde un formato redondo. Ahí nació la pregunta: ¿Cuanto podemos sostener la mirada ante el dolor y la crueldad en el mundo?
+          </p>
+          <p>
+           Pero un videominuto nos quedaba muy corto para semejante pregunta, la idea requería más, mucho más. y explotó en mil pedazos...
+          </p>
+         <iframe width="560" height="315" src="https://www.youtube.com/embed/G507822Q1cY?si=nLMG1YP9ejSbnePt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+        </div>
+      </article>
+
+      <!-- PAGINA 5: La Web -->
+      <article class="page" data-title="Web">
+        <div class="page-paper">
+          <span class="page-num">05</span>
+          <h2><span>La Órbita Multiplataforma</span></h2>
+
+          <div class="two-columns">
+            <section>
+              <p>
+                Seguro ya entraste a elojoecpatico.com.ar. Sino, no sé que estás esperando. Cómo buena guerrilla tenemos rodeado al ojo ecpático. Queremos orbitar, no dar todo por sentado: La web es parte de la experiencia. Por eso no te vas a encontrar con una web tradicional ni un folleto informativo.
+              </p>
+              <p>
+                También es el punto de encuentro. Es nuestra base. Desde acá podes ver la extensión del proyecto transmedia, y enterarte de cuando nace un nuevo formato.
+              </p>
+            </section>
+
+            <figure class="image-cutout tilted-right">
+              <img src="assets/web.png" alt="elojoecpatico.com.ar" />
+              <figcaption>Nuestra resistencia</figcaption>
+            </figure>
+          </div>
+
+          <div class="route-map">
+            <p>La web complementa la experiencia presencial de la instalación y nos lleva a la experiencia virtual.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- PAGINA 6: App p5-->
+      <article class="page" data-title="App p5.js">
+        <div class="page-paper">
+          <span class="page-num">06</span>
+          <h2><span>Arte interactivo: Sostené la mirada.
+          </span></h2>
+
+          <p>
+            Antes de enfrentarte a la dolorosa realidad, te traemos un entrenamiento virtual. Programamos una experiencia interactiva en la que te aparecerán imagenes aleatorias bajo diferentes miradas y vos tendras que sostener la mirada (sosteniedno el click del mouse o el dedo en la pantalla),lo suficiente para ver y entender que es cada una.
+          </p>
+          <p>
+           Es una aproximación virtual interactiva a ese ejercicio que nos ayude a volver a mirar, y conectarnos con lo incomprensible del dolor ajeno. 
+          </p>
+          <p>
+          Es solamente el primer paso, pero mientras más lo sostengas, van a empezar a aparecer respuestas: pero no en la aplicación sino en tu cabeza.</p>
+
+         <img src="assets/ojolog.png" alt="Portada de la expe">
+          
+      </article>
+
+      <!-- PAGINA 7: Instalación -->
+      <article class="page" data-title="Instalación">
+        <div class="page-paper">
+          <span class="page-num">07</span>
+          <h2><span>Instalación: acá no podes scrollear.</span></h2>
+
+          <p>
+            En el mundo digital es fácil escapar. En nuestra instalación física inmersiva, no. Vas a entrar en una experiencia inmersiva, un recorrido oscuro donde sólo vas a ver al ojo ecpático y algo que te va a hacer ruido, mucho ruido.
+          </p>
+          <p>
+           Habrá algunas pistas que te guien en el recorrido, y cuando te encuentres en el lugar indicado, el dispositivo se activará sólo. 
+          </p>
+
+             
+
+         <div class="web-orbit">
+            <img src="assets/Boceto.png" alt="spoiler" class="mini-eye">
+          </div>
+
+            <p class="live-note">Sólo la verdad puede aliviar eso que te hacía ruido.</p>
+        </div>
+     
+      </article>
+
+      <!-- PAGINA 8: Redes Sociales -->
+      <article class="page" data-title="Redes">
+        <div class="page-paper">
+          <span class="page-num">08</span>
+          <h2><span>Infiltrados en las redes</span></h2>
+
+          <p>
+            Estamos en Instagram, TikTok y Facebook porque ahí es donde la pedagogía de la crueldad circula impunemente.
+          </p>
+          <p>
+            Tenemos que infiltrarnos en ese terreno para formar comunidades que se encuentren ese esos contextos. Más adelante, pretendemos invitar a migrar al Fediverso, el mundo descentralizado y de código abierto, donde nadie puede controlar el algoritmo.
+          </p>
+
+          <div class="interaction-box">
+            <p>Nos encontramos por ahora en Instagram, Tik Tok, y facebook</p>
+          </div>
+
+          <p class="author-scrap">
+            En Facebook vas a encontrar un grupo donde podes compartir eso que te duele, que queres denunciar. Lo que compartas ahi, formará parte de la Instalación.
+          </p>
+        </div>
+      </article>
+
+      <!-- PAGINA 9: Stickers -->
+      <article class="page page-stickers-9" data-title="Stickers">
+        <div class="page-paper">
+          <span class="page-num">09</span>
+          <h2><span>Actuá ahora, antes de que se borre></h2>
+
+          <p>
+            Creamos stickers con nuestro Ojo y un Código QR que te lleva a nuestra web.
+          </p>
+          <p>
+            Pero hay un truco: están impresos en papel térmico. Con los días, la imagen se va a ir borrando, desgastando, hasta desaparecer. Exactamente igual a lo que hace tu memoria con las tragedias que ves en los noticieros. 
+          </p>
+          <p>Es efímero, pero mientras dure, es un portal. Encontralo. Pegalo. Difundí el virus.</p>
+
+          <div class="post-zone">
+            <button type="button" data-post="Qr">
+              <img src="assets/OJO_E_qr-code.png" alt="Qr">
+            </button>
+            <button type="button" data-post="Ojocerr"> <img src="assets/ojoecpatico.png" alt="Ojocerrado"> </button>
+            <button type="button" data-post="ojosbierto"> <img src="assets/ojoecpatico1.png" alt="Ojoabierto"> </button>
+            <p id="postOutput">Difundí, pegalos por todos lados!</p>
+          </div>
+          <div class="sticker-wall" id="postStickerWall"></div>
+        </div>
+      </article>
+
+      <!-- PAGINA 10: Arte participativo -->
+      <article class="page page-stickers-10" data-title="Artivismo">
+        <div class="page-paper">
+          <span class="page-num">10</span>
+          <h2><span>Artivismo: Te toca a Vos!</span></h2>
+
+          <div class="two-columns">
+            <section>
+              <p>
+               En la cultura digital de hoy, el artista es un médium, un productor que construye herramientas. 
+               </p>
+               <p>Siguiendo el concepto de "Artivismo Estructural" de David Casacuberta, nosotros solo armamos la estructura tecnológica
+                </p>
+                <figure class="image-cutout tilted-left">
+                <img src="assets/ojolog.png" alt="Sticker" />
+                <figcaption>Difundir es actuar!</figcaption>
+              </figure>
+               <p>Te damos las redes, el código y los proyectores. La obra no es lo que nosotros decimos, la obra es lo que VOS decidís denunciar usando nuestras herramientas'.</p>
+              <p>
+                La impresion termica se borra con el tiempo. Esa fragilidad sirve: la memoria
+                tambien se gasta si nadie la repasa.
+              </p>
+
+              
+            </section>
+          </div>
+
+          <div class="interaction-box">
+            <p>Difundí muchas veces!.</p>
+            <button id="duplicateSticker" type="button">copiar sticker</button>
+            <div class="sticker-wall" id="stickerWall">
+              <img src="assets/neutro.png" alt="Sticker inicial" />
+            </div>
+          </div>
+
+        
+      </article>
+
+      <!-- PAGINA 11: comunidad -->
+      <article class="page" data-title="Comunidad">
+        <div class="page-paper">
+          <span class="page-num">11</span>
+          <h2><span>Formá comunidad y convertí el dolor en acción</span></h2>
+
+          <p>
+            En Facebook (esa red corporativa que habitamos para hackearla) abrimos el grupo "ECO". Es nuestro portal participativo. 
+
+          </p>
+          <p>
+            Cuando estés navegando y te cruces con algo que te duela, que te indigne, eso que habitualmente ignorarías por "ecpatía"... capturalo. Subilo al grupo. Denuncialo
+          </p>
+
+          <div class="interaction-box">
+            <p>Todo el material que la comunidad envíe a ese grupo, además de difundirlo en la comunidad, pasa a formar parte de nuestra instalación física. Rompé la apatía. En comunidad podemos hacer más. <br><br></p>
+          </div>
+          <img src="assets/grupoFb.png" style="max-width: 80%;" alt="Unite a Nuestro Grupo de Facebook!">
+          
+        </div>
+      </article>
+
+      <!-- PAGINA 12: conclusión-->
+      <article class="page" data-title="Esto no termina">
+        <div class="page-paper">
+          <span class="page-num">12</span>
+          <h2><span>Esto no termina acá</span></h2>
+
+          <p>
+            El Ojo Ecpatico no puede terminar con la crueldad del mundo, pero intetaremos incomodar y problematizar una forma de mirar que se volvio automatica.</p>
+            <p> Si el scroll nos entrena para pasar de largo, este proyecto arma una traba.</p>
+            <p>Podemos inspirarnos en Marta Franco que nos trae la idea de red comun, e en Heinz que nos instiga a construir sin pedir permiso o Scolari que nos motiva a expandir la narrativa transmedia. </p>
+           
+      
+
+          <figure class="image-cutout tilted-right small-cutout">
+            <img src="assets/ojolog.png" alt="Cables" />
+            <figcaption>cables, no magia</figcaption>
+          </figure>
+
+          <div class="interaction-box">
+            <p>Ésta obra toma esos y otros presedentes, para darle forma a una pregunta que no se puede contestar tan facilmente. ¿Cómo sobrevivimos al dolor ajeno sin perder la humanidad? y ¿Que podemos hacer para que la crueldad del mundo no nos paralice?
+          </p>
+          </div>
+        </div>
+      </article>
+
+      <!-- PAGINA 13: CIERRE -->
+      <article class="page" data-title="Dejá tu huella">
+        <div class="page-paper">
+          <span class="page-num">13</span>
+          <h2><span>Dejá tu marca</span></h2>
+
+          <p>
+           Un fanzine no está terminado hasta que alguien más le deje su huella. Este espacio es tuyo. ¿Que vas a hacer cuando el algoritmo te vuelva a mostrar lo que pasa? ¿Vas a seguir scrolleando? ¿Vas a mirar para otro lado?</p>
+           <p> Dejá acá tu comentario, tu bronca, pegá esas palabras que te generamos con este proyecto. 
+          </p>
+         
+
+          <form class="final-form" id="finalForm">
+            <label for="finalNote">Escribí palabras o frases cortas y pegalas acá.</label>
+            <textarea id="finalNote" maxlength="180" placeholder="Escribi una frase corta..."></textarea>
+            <button type="submit">Dejá tu huella</button>
+            <div class="notes-wall" id="notesWall"></div>
+          </form>
+        </div>
+      </article>
+    </main>
+
+    <!-- Navegacion inferior. -->
+    <nav class="bottom-nav" aria-label="Navegacion del fanzine">
+      <button id="prevPage" type="button">←</button>
+      <p id="pageCounter">00 / 13</p>
+      <button id="nextPage" type="button">→</button>
+    </nav>
+
+    <!-- El JavaScript solo maneja navegacion e interacciones. -->
+    <script src="fanzine_script.js"></script>
+  </body>
+</html>

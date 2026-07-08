@@ -407,6 +407,11 @@ palabras.forEach((palabra) => {
       let embedEnabled = palabra.dataset.embed !== "false";
       const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
+      if (palabra.dataset.directLink === "true" && link) {
+        window.location.href = link;
+        return;
+      }
+
       if (link && isMobile) {
         const target = mobileLink || link;
         window.location.href = target;

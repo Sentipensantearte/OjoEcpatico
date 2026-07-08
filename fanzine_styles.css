@@ -1,0 +1,1095 @@
+/* =========================================================
+   ESTILOS GENERALES
+   Este archivo solo define como se ve el fanzine.
+   El texto y las imagenes estan en index.html.
+   ========================================================= */
+
+/* Variables de color para cambiar la paleta desde un solo lugar. */
+:root {
+  --ink: #111111;
+  --paper: #e7dfcf;
+  --paper-2: #d3c7b4;
+  --red: #b92522;
+  --blue: #205f68;
+  --yellow: #b9892f;
+  --white: #fff8e8;
+  --page-design-width: 520px;
+}
+
+/* Caja universal: ayuda a que anchos y altos sean predecibles. */
+* {
+  box-sizing: border-box;
+}
+
+/* Fondo general de la pantalla: mesa oscura con ruido simple. */
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: var(--ink);
+  font-family: "Courier New", Courier, monospace;
+  background:
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.04), rgba(255,255,255,0.04) 1px, transparent 1px, transparent 5px),
+    linear-gradient(135deg, #090909, #171717);
+}
+
+/* Ajusta la altura y márgenes para evitar scroll dentro del fanzine. */
+.book {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 10px 10px 66px;
+}
+
+.page {
+  display: none;
+  width: min(92vw, 520px, calc((100vh - 90px) * 0.74));
+  aspect-ratio: 148 / 210;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+}
+
+/* Los botones heredan la tipografia del fanzine. */
+button,
+textarea,
+input {
+  font: inherit;
+}
+
+/* Los botones son intencionalmente crudos, como recortes pegados. */
+button {
+  cursor: pointer;
+}
+
+.home-button {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 20;
+  padding: 8px 12px;
+  color: var(--white);
+  background: rgba(17, 17, 17, 0.9);
+  border: 1px solid rgba(255, 248, 232, 0.35);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.8rem;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+}
+
+.home-button:hover {
+  background: rgba(185, 37, 34, 0.95);
+}
+
+/* Oculta el SVG de simbolos reutilizables. */
+.svg-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+/* =========================================================
+   ESTRUCTURA DEL LIBRITO
+   Todas las paginas tienen el mismo formato A5 vertical.
+   A5 es la mitad de una hoja A4 doblada.
+   ========================================================= */
+
+/* El contenedor centra la hoja en pantalla. */
+.book {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 10px 10px 66px;
+}
+
+/* Alterna los fondos entre oscuro y claro en cada pagina. */
+.page:nth-of-type(odd) .page-paper {
+  background-image: url("assets/fondo oscuro.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: var(--white);
+}
+
+.page:nth-of-type(odd) .page-paper h1,
+.page:nth-of-type(odd) .page-paper h2,
+.page:nth-of-type(odd) .page-paper p,
+.page:nth-of-type(odd) .page-paper li,
+.page:nth-of-type(odd) .page-paper .page-num,
+.page:nth-of-type(odd) .page-paper .page-tag,
+.page:nth-of-type(odd) .page-paper .zine-kicker,
+.page:nth-of-type(odd) .page-paper .author-scrap,
+.page:nth-of-type(odd) .page-paper .live-note,
+.page:nth-of-type(odd) .page-paper .hidden-note,
+.page:nth-of-type(odd) .page-paper figcaption,
+.page:nth-of-type(odd) .page-paper button,
+.page:nth-of-type(odd) .page-paper textarea,
+.page:nth-of-type(odd) .page-paper label {
+  color: var(--white);
+}
+
+.page:nth-of-type(odd) .page-paper h1 span,
+.page:nth-of-type(odd) .page-paper h2 span,
+.page:nth-of-type(odd) .page-paper .zine-kicker,
+.page:nth-of-type(odd) .page-paper .page-tag,
+.page:nth-of-type(odd) .page-paper figcaption {
+  background: rgba(0,0,0,0.8);
+}
+
+.page:nth-of-type(even) .page-paper {
+  background-image: url("assets/claro.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Solo la pagina activa se ve. JavaScript cambia esta clase. */
+.page.active {
+  display: block;
+}
+
+/* Papel interior de cada hoja. */
+.page-paper {
+  position: absolute;
+  inset: 0;
+  /* evitamos scroll interno: el contenido se escala para caber */
+  overflow: visible;
+  /* Variable que controla el padding efectivo de cada pagina. */
+  --page-padding: clamp(16px, 3.5vw, 32px);
+  /* padding real trasladado al wrapper .page-inner para que el escalado respete márgenes */
+  padding: 0;
+  border: 2px solid var(--ink);
+  background:
+    linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px),
+    repeating-linear-gradient(0deg, rgba(0,0,0,0.03), rgba(0,0,0,0.03) 1px, transparent 1px, transparent 6px),
+    var(--paper);
+  background-size: 18px 18px, auto, auto;
+  box-shadow: 0 18px 55px rgba(0,0,0,0.55);
+  /* Tamaño de fuente base responsivo para que el texto escale con la hoja */
+  font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+  line-height: 1.4;
+}
+
+/* Contenedor interno para escalar el contenido de cada pagina */
+.page-inner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  transition: none;
+  box-sizing: border-box;
+  padding: var(--page-padding);
+}
+
+/* Contenido interior con tamaño de diseño fijo para mediciones y escalado */
+.page-content {
+  width: var(--page-design-width);
+  max-width: 100%;
+  transform-origin: top center;
+}
+
+/* Aplicar padding usando la variable definida en .page-paper */
+.page-inner {
+  padding: var(--page-padding);
+}
+
+/* Pliegue/sombra para recordar el objeto impreso. */
+.page-paper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  background: rgba(0,0,0,0.12);
+  transform: rotate(1deg);
+}
+
+/* Rayas y manchas sobre el papel. */
+.page-paper::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(25deg, transparent 0 32%, rgba(0,0,0,0.13) 32% 32.4%, transparent 32.4%),
+    linear-gradient(113deg, transparent 0 63%, rgba(185,37,34,0.18) 63% 63.5%, transparent 63.5%),
+    radial-gradient(circle at 18% 86%, rgba(32,95,104,0.16), transparent 24%);
+  mix-blend-mode: multiply;
+}
+
+/* Numero de pagina en una etiqueta roja. */
+.page-num {
+  position: absolute;
+  top: 12px;
+  left: -48px;
+  z-index: 3;
+  min-width: 44px;
+  padding: 8px 10px;
+  color: var(--white);
+  background: var(--red);
+  font-weight: 900;
+  transform: translateX(-100%);
+}
+
+/* =========================================================
+   TIPOGRAFIA Y RECORTES
+   ========================================================= */
+
+/* Titulos grandes con fondo negro tipo papel pegado. */
+h1,
+h2,
+p,
+ul,
+figure,
+.interaction-box,
+.route-map,
+.patch-wall,
+.room-demo,
+.web-orbit,
+.stare-test,
+.post-zone,
+.timeline-rip,
+.plan-switch,
+.final-form {
+  position: relative;
+  z-index: 1;
+}
+
+h1,
+h2 {
+  margin: 0 0 16px;
+  line-height: 0.98;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+/* Titulos responsivos: escalan con el tamaño de la hoja */
+h1 {
+  font-size: clamp(2.2rem, 4.5vw, 4.4rem);
+}
+
+.cover h1 {
+  font-size: clamp(1.8rem, 3.2vw, 3.2rem);
+}
+
+.page:not(.cover) h2 {
+  font-size: clamp(1rem, 2.2vw, 1.5rem);
+}
+
+h1 span,
+h2 span {
+  display: table;
+  margin: 4px 0;
+  padding: 3px 7px;
+  color: var(--white);
+  background: var(--ink);
+  transform: rotate(-1deg);
+}
+
+h1 span:nth-child(2),
+h2 span:nth-child(2) {
+  transform: rotate(1.2deg);
+}
+
+p,
+li {
+  font-size: 1rem; /* base; adjusted by .page-paper font-size */
+}
+
+p {
+  margin: 0 0 11px;
+}
+
+strong {
+  color: var(--red);
+}
+
+/* Etiquetas sueltas de fanzine. */
+.zine-kicker,
+.page-tag,
+.author-scrap,
+.live-note,
+.hidden-note,
+figcaption {
+  display: inline-block;
+  padding: 6px 8px;
+  font-weight: 900;
+}
+
+.zine-kicker,
+.page-tag {
+  color: var(--white);
+  background: var(--red);
+  text-transform: uppercase;
+}
+
+.author-scrap,
+.live-note,
+.hidden-note {
+  color: var(--ink);
+  background: var(--white);
+  border-left: 6px solid var(--red);
+}
+
+figcaption {
+  color: var(--white);
+  background: var(--ink);
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  transform: rotate(-2deg);
+}
+
+/* Lista con marcas tipo manifiesto. */
+.zine-list {
+  margin: 10px 0 16px;
+  padding-left: 18px;
+}
+
+.zine-list li {
+  margin: 7px 0;
+}
+
+/* Dos columnas cuando una hoja necesita texto + imagen. */
+.two-columns {
+  display: grid;
+  grid-template-columns: 1fr 0.8fr;
+  gap: 14px;
+  align-items: center;
+}
+
+.page[data-title="Introducción"] .two-columns {
+  grid-template-columns: 1fr;
+}
+
+.page[data-title="Introducción"] .image-cutout {
+  float: left;
+  width: 48%;
+  margin: 0 16px 12px 0;
+}
+
+.page[data-title="Introducción"] .two-columns section::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.page[data-title="Introducción"] .image-cutout img {
+  width: 100%;
+  height: auto;
+}
+
+.page[data-title="Introducción"] .page-paper {
+  /* Página Intro usa un padding ligeramente distinto */
+  --page-padding: 16px 18px 14px;
+}
+
+.page[data-title="Introducción"] h2 {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+}
+
+.page[data-title="Introducción"] p {
+  margin-bottom: 9px;
+}
+
+.page[data-title="Introducción"] .image-cutout {
+  width: 42%;
+}
+
+.page[data-title="Introducción"] .interaction-box {
+  padding: 8px 10px;
+  margin-top: -12px;
+}
+
+.page[data-title="Introducción"] .interaction-box p {
+  margin-bottom: 8px;
+}
+
+.page[data-title="Introducción"] .interaction-box button {
+  padding: 7px 10px;
+}
+
+/* =========================================================
+   IMAGENES
+   ========================================================= */
+
+.image-cutout {
+  margin: 0;
+  padding: 10px;
+  background: rgba(255,248,232,0.72);
+  border: 2px dashed rgba(0,0,0,0.5);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.cover-eye,
+.eye-lab img,
+.image-cutout img,
+.draggable-image,
+.mini-eye,
+.sticker-wall img {
+  max-width: 100%;
+  height: auto;
+}
+
+iframe {
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  display: block;
+  margin: 12px 0 0;
+}
+
+.image-cutout img {
+  max-height: 132px;
+}
+
+.cover-eye {
+  width: 66%;
+}
+
+.eye-lab img {
+  max-width: 60%;
+}
+
+.page[data-title="Ecpatía"] .eye-lab img {
+  max-width: 56%;
+}
+
+.mini-eye {
+  width: 40%;
+}
+
+
+.page[data-title="App p5.js"] .page-paper > img {
+  width: 65%;
+  height: auto;
+  float: left;
+  margin: 6px 12px 12px 0;
+}
+
+/* Página 10: que la imagen quede integrada y el texto la rodee (igual que página Intro) */
+.page.page-stickers-10 .two-columns {
+  grid-template-columns: 1fr;
+}
+
+.page.page-stickers-10 .image-cutout {
+  float: left;
+  width: 42%;
+  margin: 0 16px 12px 0;
+}
+
+.page.page-stickers-10 .two-columns section::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.page.page-stickers-10 .image-cutout img {
+  width: 100%;
+  height: auto;
+}
+
+/* Página 8: forzar texto negro en bloques de interacción y author-scrap */
+.page[data-title="App p5.js"] .page-paper .interaction-box,
+.page[data-title="App p5.js"] .page-paper .interaction-box p,
+.page[data-title="App p5.js"] .page-paper .author-scrap,
+.page[data-title="App p5.js"] .page-paper .author-scrap p {
+  color: var(--ink);
+}
+
+/* Página 3: centrar imagen de Objetivos */
+.page[data-title="Transmedia"] img {
+  display: block;
+  margin: 16px auto 0;
+  max-width: 360px;
+  width: 90%;
+  height: auto;
+}
+
+/* =========================================================
+   IMAGENES
+   ========================================================= */
+.sticker-wall img {
+  width: 72px;
+}
+
+.tilted-left {
+  transform: rotate(-4deg);
+}
+
+.tilted-right {
+  transform: rotate(3deg);
+}
+
+.small-cutout {
+  width: 58%;
+  margin-left: auto;
+  margin-bottom: 8px;
+}
+
+/* =========================================================
+   PORTADA
+   ========================================================= */
+
+.cover .page-paper {
+  color: var(--white);
+  background:
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.04), rgba(255,255,255,0.04) 1px, transparent 1px, transparent 8px),
+    #090909;
+}
+
+.cover .page-paper::before {
+  background: rgba(255,255,255,0.16);
+}
+
+.cover h1 {
+  font-size: clamp(1.8rem, 3.2vw, 3.2rem);
+  margin-bottom: 14px;
+}
+
+.cover h1 span {
+  color: var(--white);
+  background: var(--ink);
+}
+
+.cover-line {
+  width: max-content;
+  max-width: 100%;
+  padding: 8px 10px;
+  color: var(--white);
+  background: rgba(0,0,0,0.85);
+  border-left: 7px solid var(--red);
+  text-transform: uppercase;
+}
+
+.cover-eye {
+  display: block;
+  width: 92%;
+  margin: 8px auto 10px;
+  transform: translate(var(--eye-x, 0), var(--eye-y, 0)) rotate(-2deg);
+  transition: transform 80ms linear;
+}
+
+.cover-line {
+  width: max-content;
+  max-width: 100%;
+  padding: 8px 10px;
+  color: var(--white);
+  background: var(--ink);
+  border-left: 7px solid var(--red);
+  text-transform: uppercase;
+}
+
+.big-paper-button {
+  margin-top: 9px;
+  padding: 13px 18px;
+  border: 0;
+  color: var(--ink);
+  background: var(--white);
+  font-weight: 900;
+  text-transform: uppercase;
+  box-shadow: 6px 6px 0 var(--red);
+}
+
+/* =========================================================
+   BLOQUES DE INTERACCION
+   Todos tienen una instruccion visible.
+   ========================================================= */
+
+.interaction-box,
+.route-map,
+.stare-test,
+.post-zone,
+.timeline-rip,
+.plan-switch,
+.final-form {
+  margin-top: 12px;
+  padding: 10px;
+  background: rgba(255,248,232,0.68);
+  border: 2px dashed var(--ink);
+}
+
+.interaction-box button,
+.route-map button,
+.patch-wall button,
+.web-orbit button,
+.stare-test button,
+.post-zone button,
+.timeline-rip button,
+.plan-switch button,
+.final-form button {
+  border: 0;
+  padding: 8px 10px;
+  color: var(--white);
+  background: var(--ink);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.interaction-box button:hover,
+.route-map button:hover,
+.patch-wall button:hover,
+.web-orbit button:hover,
+.stare-test button:hover,
+.post-zone button:hover,
+.timeline-rip button:hover,
+.plan-switch button:hover,
+.final-form button:hover {
+  background: var(--red);
+}
+
+.hidden-note {
+  display: none;
+  margin-top: 8px;
+  padding: 8px 10px;
+  border: 1px solid rgba(0,0,0,0.16);
+  background: rgba(255,255,255,0.9);
+  color: var(--ink);
+}
+
+.page:nth-of-type(odd) .page-paper .hidden-note {
+  background: rgba(0,0,0,0.7);
+  border-color: rgba(255,255,255,0.22);
+  color: var(--white);
+}
+
+.hidden-note.visible {
+  display: block;
+}
+
+/* Checklist de objetivos. */
+.checklist label {
+  display: inline-block;
+  margin: 4px 5px 8px 0;
+  padding: 5px 7px;
+  background: var(--paper-2);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+/* Pared de parches de autores. */
+.patch-wall {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 14px 0;
+}
+
+.patch-wall button {
+  transform: rotate(-2deg);
+}
+
+.patch-wall button:nth-child(2) {
+  background: var(--blue);
+  transform: rotate(2deg);
+}
+
+.patch-wall button:nth-child(3) {
+  background: var(--yellow);
+  color: var(--ink);
+  transform: rotate(-1deg);
+}
+
+.patch-wall button:nth-child(4) {
+  background: var(--red);
+  transform: rotate(3deg);
+}
+
+.big-note {
+  min-height: 82px;
+}
+
+/* Mapa de ruta transmedia. */
+.route-map {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.route-map p {
+  width: 100%;
+  margin: 4px 0 0;
+}
+
+/* Demo visual de instalacion. */
+.room-demo {
+  height: 118px;
+  margin: 8px 0;
+  background: var(--ink);
+  border: 3px solid var(--red);
+  color: var(--white);
+  overflow: hidden;
+  opacity: var(--room-opacity, 0.72);
+}
+
+.room-demo span {
+  position: absolute;
+  padding: 5px 8px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.noise-word {
+  left: 18px;
+  top: 18px;
+  background: var(--red);
+  transform: rotate(-8deg);
+}
+
+.screen-shape {
+  right: 20px;
+  top: 35px;
+  border: 2px solid var(--white);
+}
+
+.body-dot {
+  left: 46%;
+  bottom: 14px;
+  color: var(--ink);
+  background: var(--white);
+  border-radius: 50%;
+}
+
+/* Orbita web desprolija. */
+.web-orbit {
+  height: 178px;
+  margin: 6px 0 10px;
+}
+
+.web-orbit button {
+  position: absolute;
+}
+
+.web-orbit button:nth-child(1) { left: 6%; top: 14%; }
+.web-orbit button:nth-child(2) { right: 8%; top: 18%; background: var(--blue); }
+.web-orbit button:nth-child(3) { left: 16%; bottom: 10%; background: var(--red); }
+.web-orbit button:nth-child(4) { right: 12%; bottom: 9%; background: var(--yellow); color: var(--ink); }
+
+.mini-eye {
+  width: 52%;
+  position: absolute;
+  left: 24%;
+  top: 42px;
+  transform: rotate(var(--web-eye-rotate, 0deg));
+}
+
+/* Test de sostener mirada. */
+.stare-bar {
+  height: 18px;
+  margin: 10px 0;
+  border: 2px solid var(--ink);
+  background: var(--paper-2);
+}
+
+.stare-bar span {
+  display: block;
+  width: 0%;
+  height: 100%;
+  background: var(--red);
+}
+
+/* Zona de redes y posteos. */
+.post-zone {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.post-zone p {
+  width: 100%;
+}
+
+/* Pared de stickers duplicados. */
+.sticker-wall {
+  min-height: 52px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.page.page-stickers-9 .post-zone {
+  gap: 6px;
+}
+
+.page.page-stickers-9 .post-zone button {
+  flex: 1 1 28%;
+  min-width: 28%;
+  max-width: 30%;
+}
+
+.page.page-stickers-9 .post-zone button img {
+  width: 85%;
+  max-width: 85%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  margin: 0 auto;
+}
+
+.page.page-stickers-9 .sticker-wall {
+  gap: 6px;
+}
+
+.page.page-stickers-9 .sticker-wall img {
+  width: calc(33.333% - 6px);
+  max-width: calc(33.333% - 6px);
+  height: auto;
+  object-fit: contain;
+  display: block;
+  padding: 4px 6px;
+}
+
+.sticker-wall img,
+.notes-wall p {
+  display: inline-block;
+  padding: 6px 8px;
+  color: var(--white);
+  background: var(--red);
+  border: 2px solid var(--ink);
+  font-weight: 900;
+  transform: rotate(-3deg);
+}
+
+.sticker-wall img:nth-child(2n),
+.notes-wall p:nth-child(2n) {
+  background: var(--blue);
+  transform: rotate(2deg);
+}
+
+.drag-zone {
+  position: relative;
+  min-height: 160px;
+  margin-top: 14px;
+  padding: 10px;
+  background: rgba(255,248,232,0.78);
+  border: 2px dashed var(--ink);
+}
+
+.draggable-item {
+  position: absolute;
+  width: 68px;
+  height: auto;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-drag: none;
+ /* user-drag: none; */
+  touch-action: none;
+  z-index: 50;
+}
+
+.draggable-item:active {
+  cursor: grabbing;
+}
+
+/* Formulario final. */
+.final-form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 900;
+}
+
+.final-form textarea {
+  width: 100%;
+  height: 82px;
+  resize: none;
+  border: 2px solid var(--ink);
+  padding: 8px;
+  background: var(--white);
+}
+
+.notes-wall {
+  min-height: 48px;
+  margin-top: 8px;
+}
+
+/* Ojo cerrado cuando JavaScript agrega la clase blink. */
+.eye-button {
+  display: block;
+  width: 92%;
+  margin: 4px auto;
+  border: 0;
+  background: transparent;
+}
+
+.eye-button.blink img {
+  opacity: 0.48;
+}
+
+.eye-lab {
+  margin: 6px 0;
+}
+
+.eye-lab img {
+  width: 100%;
+  display: block;
+}
+
+/* =========================================================
+   INDICE Y NAVEGACION
+   ========================================================= */
+
+.menu-button {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  z-index: 20;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  border: 0;
+  padding: 8px 10px;
+  color: var(--white);
+  background: var(--ink);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.menu-lines,
+.menu-lines::before,
+.menu-lines::after {
+  display: block;
+  width: 22px;
+  height: 3px;
+  background: var(--white);
+}
+
+.menu-lines {
+  position: relative;
+}
+
+.menu-lines::before,
+.menu-lines::after {
+  content: "";
+  position: absolute;
+  left: 0;
+}
+
+.menu-lines::before {
+  top: -7px;
+}
+
+.menu-lines::after {
+  top: 7px;
+}
+
+.index-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 30;
+  width: min(330px, 92vw);
+  height: 100vh;
+  padding: 16px;
+  color: var(--white);
+  background: #080808;
+  border-left: 4px solid var(--red);
+  transform: translateX(110%);
+  transition: transform 160ms ease;
+}
+
+.index-panel.open {
+  transform: translateX(0);
+}
+
+.index-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  text-transform: uppercase;
+}
+
+.index-header button,
+.index-list button {
+  border: 1px solid rgba(255,255,255,0.28);
+  color: var(--white);
+  background: transparent;
+  padding: 8px;
+  text-transform: uppercase;
+}
+
+.index-list {
+  display: grid;
+  gap: 6px;
+}
+
+.index-list button {
+  text-align: left;
+}
+
+.index-list button.active,
+.index-list button:hover,
+.index-header button:hover {
+  background: var(--red);
+}
+
+.bottom-nav {
+  position: fixed;
+  left: 50%;
+  bottom: 12px;
+  z-index: 20;
+  transform: translateX(-50%);
+  display: grid;
+  grid-template-columns: 44px 90px 44px;
+  align-items: center;
+  gap: 10px;
+  color: var(--white);
+  background: rgba(0,0,0,0.86);
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 8px;
+}
+
+.bottom-nav button {
+  height: 34px;
+  border: 0;
+  color: var(--white);
+  background: transparent;
+  font-size: 1.6rem;
+}
+
+.bottom-nav p {
+  margin: 0;
+  text-align: center;
+  font-weight: 900;
+}
+
+/* =========================================================
+   RESPONSIVE SIMPLE
+   En pantallas chicas bajo un poco la tipografia.
+   ========================================================= */
+
+@media (max-width: 520px) {
+  .page-paper {
+    padding: 28px 22px 24px;
+  }
+
+  h1 {
+    font-size: 3.4rem;
+  }
+
+  h2 {
+    font-size: 1.55rem;
+  }
+
+  p,
+  li {
+    font-size: 0.8rem;
+  }
+
+  .two-columns {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .image-cutout {
+    width: 58%;
+    margin-left: auto;
+  }
+}
