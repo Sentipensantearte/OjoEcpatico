@@ -1,9 +1,7 @@
-// Manejo del fanzine.
 
-// Guardamos todas las paginas en un array para poder navegar.
 const pages = Array.from(document.querySelectorAll(".page"));
 
-/* Envoltorio interno para cada page-paper: permite escalar contenido sin scroll. */
+
 function ensurePageInner() {
   pages.forEach((page) => {
     const paper = page.querySelector('.page-paper');
@@ -32,7 +30,7 @@ function getPageScale(page) {
   const content = inner ? inner.querySelector('.page-content') : null;
   if (!paper || !inner || !content) return 1;
 
-  // Account for inner padding so content doesn't get scaled into the padding area
+
   const cs = getComputedStyle(inner);
   const padLeft = parseFloat(cs.paddingLeft) || 0;
   const padRight = parseFloat(cs.paddingRight) || 0;
@@ -42,7 +40,7 @@ function getPageScale(page) {
   const availW = paper.clientWidth - padLeft - padRight;
   const availH = paper.clientHeight - padTop - padBottom;
 
-  // Use the dedicated content box for stable measurements
+ 
   content.style.transform = 'none';
   const rect = content.getBoundingClientRect();
   const contentW = Math.max(1, rect.width);
@@ -87,7 +85,7 @@ window.addEventListener('resize', () => {
   resizeTimer = setTimeout(fitAllPages, 120);
 });
 
-// Guardamos botones y lugares importantes de la interfaz.
+
 const prevPageButton = document.querySelector("#prevPage");
 const nextPageButton = document.querySelector("#nextPage");
 const pageCounter = document.querySelector("#pageCounter");
@@ -96,37 +94,37 @@ const closeIndexButton = document.querySelector("#closeIndex");
 const indexPanel = document.querySelector("#indexPanel");
 const indexList = document.querySelector("#indexList");
 
-// Esta variable dice que pagina se esta viendo ahora.
+
 let currentPage = 0;
 
-// Funcion chica para escribir numeros con dos digitos: 1 pasa a 01.
+
 function twoDigits(number) {
   return String(number).padStart(2, "0");
 }
 
-// Muestra una pagina y oculta todas las demas.
+
 function showPage(pageNumber) {
-  /* Evita que el numero se vaya antes de la primera o despues de la ultima pagina. */
+ 
   currentPage = Math.max(0, Math.min(pageNumber, pages.length - 1));
 
-  /* Recorremos todas las paginas y dejamos activa solo la actual. */
+ 
   pages.forEach((page, index) => {
     page.classList.toggle("active", index === currentPage);
   });
 
-  /* Actualizamos el contador inferior. */
+  
   pageCounter.textContent = `${twoDigits(currentPage)} / ${twoDigits(pages.length - 1)}`;
 
-  /* Marcamos en el indice cual pagina esta activa. */
+ 
   document.querySelectorAll("[data-index-button]").forEach((button, index) => {
     button.classList.toggle("active", index === currentPage);
   });
 
-  // Ajustar escala global de todas las paginas para mantener coherencia.
+  
   requestAnimationFrame(fitAllPages);
 }
 
-// Construye el indice leyendo el atributo data-title de cada pagina.
+
 function buildIndex() {
   pages.forEach((page, index) => {
     const button = document.createElement("button");
@@ -134,8 +132,7 @@ function buildIndex() {
     button.dataset.indexButton = index;
     button.textContent = `${twoDigits(index)} - ${page.dataset.title}`;
 
-    /* Cada boton del indice lleva a su pagina. */
-    button.addEventListener("click", () => {
+       button.addEventListener("click", () => {
       showPage(index);
       closeIndex();
     });
@@ -144,67 +141,60 @@ function buildIndex() {
   });
 }
 
-// Abre el indice lateral.
+
 function openIndex() {
   indexPanel.classList.add("open");
   indexPanel.setAttribute("aria-hidden", "false");
 }
 
-// Cierra el indice lateral.
+
 function closeIndex() {
   indexPanel.classList.remove("open");
   indexPanel.setAttribute("aria-hidden", "true");
 }
 
-// Botones de navegacion inferior.
+
 prevPageButton.addEventListener("click", () => showPage(currentPage - 1));
 nextPageButton.addEventListener("click", () => showPage(currentPage + 1));
 
-// Botones de indice.
+
 menuButton.addEventListener("click", openIndex);
 closeIndexButton.addEventListener("click", closeIndex);
 
-// Botones que tienen data-go-to, por ejemplo la portada.
+
 document.querySelectorAll("[data-go-to]").forEach((button) => {
   button.addEventListener("click", () => {
     showPage(Number(button.dataset.goTo));
   });
 });
 
-// Flechas del teclado para navegar. Escape cierra el indice.
+
 document.addEventListener("keydown", (event) => {
   if (event.key === "ArrowRight") showPage(currentPage + 1);
   if (event.key === "ArrowLeft") showPage(currentPage - 1);
   if (event.key === "Escape") closeIndex();
 });
 
-// Interacciones por pagina.
 
-// Interaccion generica: muestra u oculta una nota escondida. Recalcula escala.
 document.querySelectorAll("[data-toggle-target]").forEach((button) => {
   button.addEventListener("click", () => {
     const note = document.querySelector(`#${button.dataset.toggleTarget}`);
     note.classList.toggle("visible");
-    // Recompute the global scale so visible text and notes fit consistently.
+    
     requestAnimationFrame(fitAllPages);
   });
 });
 
-// Pagina 2: cerrar y abrir el ojo.
+
 const blinkEyeButton = document.querySelector("#blinkEye");
 if (blinkEyeButton) {
   blinkEyeButton.addEventListener("click", () => {
     blinkEyeButton.classList.toggle("blink");
   });
-}
-
-// Pagina 4: textos de autores en lenguaje fanzine.
-const authorTexts = {
-  franco: "Franco avisa: las redes fueron nuestras antes de que las capturaran. El proyecto intenta abrir un hueco comun dentro de esa captura.",
-  casacuberta: "Casacuberta sirve para romper el pedestal: crear tambien es armar herramientas para que otres completen la obra.",
-  heinz: "Heinz trae la estrategia DIY: no esperar permiso del sistema, construir alternativa, publicarla y dejar que circule.",
-  scolari: "Scolari ordena el mapa: transmedia no es copiar y pegar, es que cada medio agregue una pieza distinta."
 };
+
+
+
 
 const authorOutput = document.querySelector("#authorOutput");
 document.querySelectorAll("[data-author]").forEach((button) => {
@@ -214,7 +204,7 @@ document.querySelectorAll("[data-author]").forEach((button) => {
 });
 
 
-// Pagina 9: piezas de redes.
+
 const postTexts = {
   pulso: "PULSO: pagina publica, senial hacia afuera, ritmo de difusion.",
   eco: "ECO: grupo participativo, foro, archivo vivo de aportes.",
@@ -240,7 +230,7 @@ document.querySelectorAll("[data-post]").forEach((button) => {
   });
 });
 
-// Pagina 10: duplicar sticker con imagen en lugar de texto.
+
 const duplicateStickerButton = document.querySelector("#duplicateSticker");
 const stickerWall = document.querySelector("#stickerWall");
 
@@ -254,7 +244,7 @@ if (duplicateStickerButton && stickerWall) {
   });
 }
 
-// Movilidad de stickers en paginas seleccionadas.
+
 let activeSticker = null;
 let offsetX = 0;
 let offsetY = 0;
@@ -341,7 +331,7 @@ document.addEventListener("pointercancel", () => {
 
 initStickerInteraction();
 
-// Pagina 13: formulario final. Guarda notas solo en esta computadora/navegador.
+
 const finalForm = document.querySelector("#finalForm");
 const finalNote = document.querySelector("#finalNote");
 const notesWall = document.querySelector("#notesWall");
@@ -364,14 +354,13 @@ if (finalForm && finalNote && notesWall) {
   });
 }
 
-// Inicializacion: armamos indice y mostramos la portada.
-// Recompute scaling when images inside pages finish loading
+
 function attachImageLoadHandlers() {
   pages.forEach((page) => {
     const imgs = Array.from(page.querySelectorAll('img'));
     imgs.forEach((img) => {
       if (img.complete) {
-        // already loaded - ensure page scales correctly
+        
         requestAnimationFrame(fitAllPages);
       } else {
         img.addEventListener('load', () => fitAllPages());
@@ -381,7 +370,7 @@ function attachImageLoadHandlers() {
 }
 
 buildIndex();
-// Preparar wrappers y ajustar escalado automático
+
 ensurePageInner();
 fitAllPages();
 showPage(0);
