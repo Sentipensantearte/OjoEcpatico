@@ -1,6 +1,6 @@
-// ====================================
+// ==
 // ELEMENTOS
-// ====================================
+// ==
 
 const palabras =
   document.querySelectorAll(".palabra");
@@ -31,10 +31,9 @@ let hoverCount = 0;
 let idleFrame = 0;
 let idleTimer = null;
 
-// ====================================
+// ==
 // VARIABLES GLOBALES
-// ====================================
-
+// ====
 let anchoPantalla;
 let altoPantalla;
 
@@ -48,10 +47,9 @@ let rotacion = 0;
 
 let velocidad = 0.08;
 
-// ====================================
+// ==
 // FUNCION RESPONSIVE
-// ====================================
-
+// ==
 function recalcularSistema() {
 
   // tamaño pantalla
@@ -70,8 +68,6 @@ function recalcularSistema() {
   centroY =
     altoPantalla / 2;
 
-  // usamos el lado mas chico
-  // para mantener proporciones
 
   const ladoMenor =
     Math.min(
@@ -79,10 +75,9 @@ function recalcularSistema() {
       altoPantalla
     );
 
-  // ==================================
+  // ===
   // TAMAÑO ORBITA
-  // ==================================
-
+  // =
   const isLandscape = anchoPantalla > altoPantalla;
   if (isLandscape) {
     radioX = ladoMenor * 0.34;
@@ -92,10 +87,9 @@ function recalcularSistema() {
     radioY = ladoMenor * 0.20;
   }
 
-  // ==================================
+  // =
   // RESPONSIVE TEXTO
-  // ==================================
-
+  // ===
   palabras.forEach((palabra) => {
 
     // tamaño base responsive
@@ -116,10 +110,10 @@ function recalcularSistema() {
   });
 }
 
-// ejecutamos una vez
+// ejecuto una vez
 recalcularSistema();
 
-// recalculamos al cambiar tamaño
+// recalculo al cambiar tamaño
 window.addEventListener(
   "resize",
   recalcularSistema
@@ -190,13 +184,10 @@ function startIdleAnimation() {
 
 startIdleAnimation();
 
-// ====================================
+// ==
 // ANIMACION ORBITAL
-// ====================================
+// ==
 
-// ====================================
-// ORIENTATION / ROTATE PROMPT
-// ====================================
 
 const rotateScreen = document.getElementById('rotate-screen');
 let savedVelocidad = velocidad;
@@ -245,9 +236,9 @@ function animar() {
       (anguloBase + rotacion)
       * Math.PI / 180;
 
-    // ==================================
+    // ==
     // POSICION
-    // ==================================
+    // ====
 
     const x =
       centroX +
@@ -263,9 +254,9 @@ function animar() {
     palabra.style.top =
       y + "px";
 
-    // ==================================
+    // ===
     // PROFUNDIDAD
-    // ==================================
+    // ==
 
     const profundidad =
       (Math.sin(angulo) + 1) / 2;
@@ -280,7 +271,7 @@ function animar() {
     palabra.style.opacity =
       0.25 + profundidad * 0.75;
 
-    // transform
+    // transformar
 
     palabra.style.transform =
       "translate(-50%, -50%) scale(" +
@@ -298,15 +289,14 @@ function animar() {
 // iniciar
 animar();
 
-// ====================================
+// ===
 // INTERACCIONES
-// ====================================
+// ===
 
 palabras.forEach((palabra) => {
 
-  // ==================================
+ 
   // HOVER
-  // ==================================
 
   const startTouchHover = (event) => {
     hoverCount += 1;
@@ -391,9 +381,9 @@ palabras.forEach((palabra) => {
     endTouchHover
   );
 
-  // ==================================
+  
   // CLICK
-  // ==================================
+  
 
   palabra.addEventListener(
     "click",
@@ -433,7 +423,7 @@ palabras.forEach((palabra) => {
             embedEnabled = false;
           }
         } catch (e) {
-          // si la URL no es válida, no cambiamos embedEnabled
+          // si la URL no es válida, no cambio embedEnabled
         }
       }
 
@@ -478,9 +468,7 @@ palabras.forEach((palabra) => {
   );
 });
 
-// ====================================
-// CERRAR MODAL
-// ====================================
+
 
 function closeModal() {
   if (modal.style.display !== "flex") return;
