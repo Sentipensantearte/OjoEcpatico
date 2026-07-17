@@ -1,6 +1,6 @@
-/* Estilos generales del fanzine. */
 
-/* Variables de color para cambiar la paleta desde un solo lugar. */
+
+/* Variables de color  */
 :root {
   --ink: #111111;
   --paper: #e7dfcf;
@@ -36,7 +36,7 @@ body {
   background-position: center;
 }
 
-/* Los botones heredan la tipografia del fanzine. */
+
 button,
 textarea,
 input {
@@ -67,7 +67,7 @@ button {
   background: rgba(185, 37, 34, 0.95);
 }
 
-/* Estructura del librito. */
+/* Estructura del fanzine. */
 
 .book {
   min-height: 100vh;
@@ -76,7 +76,7 @@ button {
   padding: 10px 10px 66px;
 }
 
-/* Alterna los fondos entre oscuro y claro en cada pagina. */
+/* Acá alterno los fondos oscuro y claro. */
 .page:nth-of-type(odd) .page-paper {
   background-image: url("assets/fondo oscuro.jpg");
   background-repeat: no-repeat;
@@ -119,15 +119,13 @@ button {
   display: block;
 }
 
-/* Papel interior de cada hoja. */
+
 .page-paper {
   position: absolute;
   inset: 0;
-  /* evitamos scroll interno: el contenido se escala para caber */
+  /* intento evitar el scroll interno, este es un intento (de muchos) para que todo el texto entre en cada hoja */
   overflow: visible;
-  /* Variable que controla el padding efectivo de cada pagina. */
   --page-padding: clamp(16px, 3.5vw, 32px);
-  /* padding real trasladado al wrapper .page-inner para que el escalado respete márgenes */
   padding: 0;
   border: 2px solid var(--ink);
   background:
@@ -136,7 +134,7 @@ button {
     var(--paper);
   background-size: 18px 18px, auto, auto;
   box-shadow: 0 18px 55px rgba(0,0,0,0.55);
-  /* Tamaño de fuente base responsivo para que el texto escale con la hoja */
+  /* Puse un tamaño de texto responsivo para que siempre entre bien */
   font-size: clamp(0.95rem, 1.5vw, 1.05rem);
   line-height: 1.4;
 }
@@ -153,14 +151,14 @@ button {
   padding: var(--page-padding);
 }
 
-/* Contenido interior con tamaño de diseño fijo para mediciones y escalado */
+
 .page-content {
   width: var(--page-design-width);
   max-width: 100%;
   transform-origin: top center;
 }
 
-/* Pliegue/sombra para recordar el objeto impreso. */
+
 .page-paper::before {
   content: "";
   position: absolute;
@@ -198,9 +196,6 @@ button {
   transform: translateX(-100%);
 }
 
-/* =========================================================
-   TIPOGRAFIA Y RECORTES
-   ========================================================= */
 
 /* Titulos grandes con fondo negro tipo papel pegado. */
 h1,
@@ -230,7 +225,7 @@ h2 {
   text-transform: uppercase;
 }
 
-/* Titulos responsivos: escalan con el tamaño de la hoja */
+/* Titulos responsivos */
 h1 {
   font-size: clamp(2.2rem, 4.5vw, 4.4rem);
 }
@@ -260,7 +255,7 @@ h2 span:nth-child(2) {
 
 p,
 li {
-  font-size: 1rem; /* base; adjusted by .page-paper font-size */
+  font-size: 1rem; 
 }
 
 p {
@@ -336,7 +331,7 @@ figcaption {
 }
 
 .page[data-title="Introducción"] .page-paper {
-  /* Página Intro usa un padding ligeramente distinto */
+  
   --page-padding: 16px 18px 14px;
 }
 
@@ -366,7 +361,7 @@ figcaption {
   padding: 7px 10px;
 }
 
-/* Imagenes. */
+
 
 .image-cutout {
   margin: 0;
@@ -427,7 +422,7 @@ iframe {
   margin: 6px 12px 12px 0;
 }
 
-/* Página 10: que la imagen quede integrada y el texto la rodee (igual que página Intro) */
+
 .page.page-stickers-10 .two-columns {
   grid-template-columns: 1fr;
 }
@@ -449,7 +444,7 @@ iframe {
   height: auto;
 }
 
-/* Página 8: forzar texto negro en bloques de interacción y author-scrap */
+
 .page[data-title="App p5.js"] .page-paper .interaction-box,
 .page[data-title="App p5.js"] .page-paper .interaction-box p,
 .page[data-title="App p5.js"] .page-paper .author-scrap,
@@ -457,7 +452,7 @@ iframe {
   color: var(--ink);
 }
 
-/* Página 3: centrar imagen de Objetivos */
+
 .page[data-title="Transmedia"] img {
   display: block;
   margin: 16px auto 0;
@@ -466,9 +461,7 @@ iframe {
   height: auto;
 }
 
-/* =========================================================
-   IMAGENES
-   ========================================================= */
+
 .sticker-wall img {
   width: 72px;
 }
@@ -539,10 +532,7 @@ iframe {
   box-shadow: 6px 6px 0 var(--red);
 }
 
-/* =========================================================
-   BLOQUES DE INTERACCION
-   Todos tienen una instruccion visible.
-   ========================================================= */
+
 
 .interaction-box,
 .route-map,
@@ -647,7 +637,7 @@ iframe {
   min-height: 82px;
 }
 
-/* Mapa de ruta transmedia. */
+
 .route-map {
   display: flex;
   flex-wrap: wrap;
@@ -659,7 +649,7 @@ iframe {
   margin: 4px 0 0;
 }
 
-/* Demo visual de instalacion. */
+
 .room-demo {
   height: 118px;
   margin: 8px 0;
@@ -698,7 +688,7 @@ iframe {
   border-radius: 50%;
 }
 
-/* Orbita web desprolija. */
+
 .web-orbit {
   height: 178px;
   margin: 6px 0 10px;
@@ -821,7 +811,7 @@ iframe {
   cursor: grab;
   user-select: none;
   -webkit-user-drag: none;
- /* user-drag: none; */
+ 
   touch-action: none;
   z-index: 50;
 }
@@ -830,7 +820,7 @@ iframe {
   cursor: grabbing;
 }
 
-/* Formulario final. */
+
 .final-form label {
   display: block;
   margin-bottom: 8px;
@@ -851,7 +841,7 @@ iframe {
   margin-top: 8px;
 }
 
-/* Ojo cerrado cuando JavaScript agrega la clase blink. */
+
 .eye-button {
   display: block;
   width: 92%;
@@ -873,9 +863,7 @@ iframe {
   display: block;
 }
 
-/* =========================================================
-   INDICE Y NAVEGACION
-   ========================================================= */
+
 
 .menu-button {
   position: fixed;
@@ -1002,10 +990,7 @@ iframe {
   font-weight: 900;
 }
 
-/* =========================================================
-   RESPONSIVE SIMPLE
-   En pantallas chicas bajo un poco la tipografia.
-   ========================================================= */
+
 
 @media (max-width: 520px) {
   .page-paper {
